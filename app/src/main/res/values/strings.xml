@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Flight Club</string>
     <string name="login_title"><u>Flight Club</u></string>
-    <string name="dont_have_acct"><u>"Don't have an account? Create one now!"</u></string>
+    <string name="dont_have_acct"><u>"Don't have an account? <b>Sign up here.</b>"</u></string>
     <string name="sign_in">sign in</string>
     <string name="password">Password</string>
     <string name="email_address">Email </string>
+    <string name="title_activity_create_account">CreateAccountActivity</string>
+    <string name="SignUpButton_text">Sign Up</string>
+    <string name="createAccount_title">Create Account</string>
+    <string name="ReturnToLoginText"><b><u>Return to Login</u></b></string>
 </resources>

@@ -66,6 +66,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:clickable="true"
+            android:onClick="goToCreateAccount"
             android:text = "@string/dont_have_acct"
             android:id="@+id/create_acct"/>
 

@@ -1,5 +1,6 @@
 package com.teamflightclub.flightclub;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,12 +25,12 @@ public class LoginActivity extends AppCompatActivity {
         email_input = (EditText)findViewById(R.id.email_text);
         password_input = (EditText)findViewById(R.id.password_text);
         login = (Button)findViewById(R.id.login_button);
-        account_creation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("ACCT_CLICK", "You have clicked on the create acct text");
-            }
-        });
+//        account_creation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("ACCT_CLICK", "You have clicked on the create acct text");
+//            }
+//        });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +50,11 @@ public class LoginActivity extends AppCompatActivity {
         LoginAuthenticator loginAuthenticator = new LoginAuthenticator(this);
         loginAuthenticator.execute(email,password);
 
+    }
+
+    public void goToCreateAccount(View view){
+        Intent I = new Intent(this, CreateAccountActivity.class);
+        startActivity(I);
     }
 
 
