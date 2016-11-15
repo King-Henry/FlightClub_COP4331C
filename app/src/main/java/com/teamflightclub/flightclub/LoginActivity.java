@@ -3,6 +3,8 @@ package com.teamflightclub.flightclub;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,12 +27,15 @@ public class LoginActivity extends AppCompatActivity {
         email_input = (EditText)findViewById(R.id.email_text);
         password_input = (EditText)findViewById(R.id.password_text);
         login = (Button)findViewById(R.id.login_button);
-//        account_creation.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("ACCT_CLICK", "You have clicked on the create acct text");
-//            }
-//        });
+        login.setEnabled(false);
+        account_creation.setOnClickListener(new View.OnClickListener() {
+           @Override
+            public void onClick(View v) {
+                Log.d("ACCT_CLICK", "You have clicked on the create acct text");
+                goToCreateAccount();
+            }
+        });
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +44,32 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        password_input.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(!password_input.getText().toString().equals("")
+                        && !email_input.getText().toString().equals("")){
+
+                    login.setEnabled(true);
+                }
+                else{
+                    login.setEnabled(false);
+                }
+
+                return;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
     }
@@ -52,9 +83,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void goToCreateAccount(View view){
-        Intent I = new Intent(this, CreateAccountActivity.class);
-        startActivity(I);
+    public void goToCreateAccount(){
+        Intent createAccount = new Intent(this, CreateAccountActivity.class);
+        startActivity(createAccount);
     }
 
 

@@ -9,4 +9,7 @@
     <string name="SignUpButton_text">Sign Up</string>
     <string name="createAccount_title">Create Account</string>
     <string name="ReturnToLoginText"><b><u>Return to Login</u></b></string>
+    <string name="first_Name">First Name</string>
+    <string name="last_name">Last_Name</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
