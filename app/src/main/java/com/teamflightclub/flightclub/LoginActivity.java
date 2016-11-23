@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.util.Log;
+
+import com.teamflightclub.flightclub.ui.ControlPanelActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -41,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 LoginClicked();
+
             }
         });
 
@@ -81,12 +85,14 @@ public class LoginActivity extends AppCompatActivity {
         LoginAuthenticator loginAuthenticator = new LoginAuthenticator(this);
         loginAuthenticator.execute(email,password);
 
+
     }
 
     public void goToCreateAccount(){
         Intent createAccount = new Intent(this, CreateAccountActivity.class);
         startActivity(createAccount);
     }
+
 
 
 }

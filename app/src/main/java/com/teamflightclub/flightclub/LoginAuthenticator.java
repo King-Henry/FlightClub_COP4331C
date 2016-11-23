@@ -3,6 +3,10 @@ package com.teamflightclub.flightclub;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
+import android.content.Intent;
+
+import com.teamflightclub.flightclub.ui.ControlPanelActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -78,10 +82,18 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
-        alertDialog.show();
-    }
 
+        if(result.contains("Login Success")) // msg you get from success like "Login Success"
+        {
+            Intent i = new Intent(context,ControlPanelActivity.class);
+            context.startActivity(i);
+        }
+        else{
+            alertDialog.setMessage(result);
+            alertDialog.show();
+        }
+
+    }
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
