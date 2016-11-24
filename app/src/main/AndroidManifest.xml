@@ -20,7 +20,12 @@
         <activity
             android:name=".CreateAccountActivity"
             android:theme="@style/AppTheme" />
+
+        <activity android:name=".ui.ViewPursTicketsActivity"></activity>
+        <activity android:name=".ControlPanelActivity"></activity>
+
         <activity android:name=".LoginActivity"></activity>
+
     </application>
 
 </manifest>
