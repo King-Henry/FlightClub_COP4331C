@@ -80,7 +80,7 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
 
-        if(result.contains("Login Success")) // msg you get from success like "Login Success"
+        if(result.contains("Login Success") || result.contains("8")) // msg you get from success like "Login Success"
         {
             Intent i = new Intent(context,ControlPanelActivity.class);
             context.startActivity(i);
