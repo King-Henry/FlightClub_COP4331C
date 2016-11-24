@@ -2,11 +2,8 @@ package com.teamflightclub.flightclub;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.widget.Toast;
 import android.content.Intent;
-
-import com.teamflightclub.flightclub.ui.ControlPanelActivity;
+import android.os.AsyncTask;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

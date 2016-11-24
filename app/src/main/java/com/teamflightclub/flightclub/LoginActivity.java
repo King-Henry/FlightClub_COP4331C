@@ -10,9 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.util.Log;
-
-import com.teamflightclub.flightclub.ui.ControlPanelActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         login = (Button)findViewById(R.id.login_button);
         login.setEnabled(false);
         account_creation.setOnClickListener(new View.OnClickListener() {
-           @Override
+            @Override
             public void onClick(View v) {
                 Log.d("ACCT_CLICK", "You have clicked on the create acct text");
                 goToCreateAccount();
