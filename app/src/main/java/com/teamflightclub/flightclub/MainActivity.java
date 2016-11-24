@@ -13,7 +13,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    public String rowID = "";
 
     Button flightsCategory;
     Button hotelsCategory;

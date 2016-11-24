@@ -1,20 +1,24 @@
 package com.teamflightclub.flightclub;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ChangePasswordActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends AppCompatActivity{
     Button changePasswordbutton;
     TextView changePasswordText;
     EditText changePasswordCurrentPass;
     EditText changePasswordNewPassword;
     EditText changePasswordNewConfirmPass;
+    String rowID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
          changePasswordNewPassword = (EditText)findViewById(R.id.newPassword_changepassword);
          changePasswordNewConfirmPass = (EditText)findViewById(R.id.newconfirmPassword_changepassword);
          changePasswordbutton.setEnabled(false);
+        Intent intent = getIntent();
+        rowID = intent.getStringExtra("rowID");
+        //Log.v("myApp","Row ID = "+rowID);
 
         changePasswordCurrentPass.addTextChangedListener( mTextWatcher);
         changePasswordNewPassword.addTextChangedListener( mTextWatcher);
@@ -33,6 +40,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
          changePasswordbutton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                // Log.d("ACCT_CLICK", "You have clicked on the create acct text");
+                ChangePasswordClicked();
 
             }
         });
@@ -53,6 +61,29 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
     };
 
+    public void ChangePasswordClicked(){
+        String oldPassword = changePasswordCurrentPass.getText().toString();
+        String newPassword = changePasswordNewPassword.getText().toString();
+        String confirmPassword = changePasswordNewConfirmPass.getText().toString();
+        //Log.v("myApp","Row ID = "+rowID);
+        if (!newPassword.equals(confirmPassword)) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("ERROR");
+            alertDialog.setMessage("Passwords do not match.");
+            alertDialog.show();
+        }
+        else if (oldPassword.equals("") || newPassword.equals("") || confirmPassword.equals("")){
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("ERROR");
+            alertDialog.setMessage("Please enter all fields.");
+            alertDialog.show();
+        }
+        else {
+            ChangePasswordAuthenticator changePasswordAuthenticator = new ChangePasswordAuthenticator(this);
+            changePasswordAuthenticator.execute(rowID,oldPassword,newPassword);
+        }
+    }
+
     public void checkText()
     {
 
@@ -67,5 +98,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
             changePasswordbutton.setEnabled(true);
         }
     }
-    }
+
+//    @Override
+//    public void done() {
+//        finish();
+//    }
+}
 

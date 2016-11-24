@@ -3,6 +3,7 @@ package com.teamflightclub.flightclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ public class ControlPanelActivity extends AppCompatActivity {
         Button viewTicket;
         Button viewChangePassword;
         Button viewChangeEmail;
+        String rowID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -21,6 +23,10 @@ public class ControlPanelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_control_panel);
         Toast.makeText(getApplicationContext(), "Login Successful!",Toast.LENGTH_LONG).show();
         viewTicket = (Button)findViewById(R.id.viewTicket);
+
+        Intent intent = getIntent();
+        rowID = intent.getStringExtra("rowID");
+        //Log.v("myApp","Row ID = "+rowID);
 
         viewChangePassword = (Button)findViewById(R.id.changePassword);
 
@@ -52,7 +58,9 @@ public class ControlPanelActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void openChangePassword() {
+        //Log.v("myApp","Row ID = "+rowID);
         Intent intent = new Intent(this, ChangePasswordActivity.class);
+        intent.putExtra("rowID",rowID);
         startActivity(intent);
 
     }
