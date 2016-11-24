@@ -1,8 +1,9 @@
 package com.teamflightclub.flightclub;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -11,12 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements AsyncCallback {
 
     TextView account_creation;
     EditText email_input;
     EditText password_input;
     Button login;
+
+    LoginAuthenticator loginAuthenticator;
+
+   public static int LOGIN_RESULT;
 
 
     @Override
@@ -75,12 +80,20 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
+
     public void LoginClicked(){
 
         String email = email_input.getText().toString();
         String password = password_input.getText().toString();
-        LoginAuthenticator loginAuthenticator = new LoginAuthenticator(this);
+        LoginAuthenticator loginAuthenticator = new LoginAuthenticator(this,this);
         loginAuthenticator.execute(email,password);
+
 
 
     }
@@ -91,5 +104,24 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+
+
+
+    @Override
+    public void done() {
+
+        if (LOGIN_RESULT == 1000) {
+
+            Intent returnToMainActivity = new Intent();
+            setResult(Activity.RESULT_OK);
+            finish();
+
+        }
+
+            else{
+            //doNothing
+        }
+
+    }
 
 }

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -25,10 +27,14 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
 
     Context context;
     AlertDialog alertDialog;
+    AsyncCallback callback;
 
-    LoginAuthenticator (Context contxt) {
+    String result = "";
+
+    LoginAuthenticator(Context contxt, AsyncCallback asyncCallback) {
 
         context = contxt;
+        callback = asyncCallback;
     }
 
     @Override
@@ -52,7 +58,6 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
             outputStream.close();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-            String result = "";
             String line = "";
             while ((line = bufferedReader.readLine()) != null) {
                 result += line;
@@ -79,22 +84,46 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
+        String resultMessage = "";
+        if (result.equals(""))
+            resultMessage = "Username/Password Not Found";
+        else {
+            resultMessage = "Login Successful";
+            Intent intent = new Intent(context, ControlPanelActivity.class);
+            context.startActivity(intent);
+        }
+        alertDialog.setMessage(resultMessage);
+        alertDialog.show();
 
-        if(result.contains("Login Success") || result.contains("8")) // msg you get from success like "Login Success"
-        {
-            Intent i = new Intent(context,ControlPanelActivity.class);
-            context.startActivity(i);
+        if (result.equals("Login Successful")) {
+
+            Log.v("LoginActivity", "Login SUCCESFULLLLLL");
+            LoginActivity.LOGIN_RESULT = 1000;
+        } else {
+
+            LoginActivity.LOGIN_RESULT = 0;
         }
-        else{
-            alertDialog.setMessage(result);
-            alertDialog.show();
-        }
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+
+                alertDialog.dismiss();
+                callback.done();
+            }
+        },2000);
+
 
     }
+
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
 
-}
 
+
+
+}
