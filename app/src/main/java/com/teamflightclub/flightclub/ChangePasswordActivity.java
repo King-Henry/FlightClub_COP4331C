@@ -29,6 +29,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         changePasswordCurrentPass.addTextChangedListener( mTextWatcher);
         changePasswordNewPassword.addTextChangedListener( mTextWatcher);
         changePasswordNewConfirmPass.addTextChangedListener( mTextWatcher);
+
          changePasswordbutton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                // Log.d("ACCT_CLICK", "You have clicked on the create acct text");
