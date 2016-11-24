@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
-import android.widget.Toast;
 
 import com.teamflightclub.flightclub.R;
 import com.teamflightclub.flightclub.adapter.AdapterRec;
@@ -18,7 +17,6 @@ public class ViewPursTicketsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_purs_ticket);
-        Toast.makeText(getApplicationContext(), "Login Successful!",Toast.LENGTH_LONG).show();
         recView = (RecyclerView)findViewById(R.id.rec_list);
         //LayoutManager: GridLayoutManager or StaggeredGridLayoutManager
         recView.setLayoutManager(new LinearLayoutManager(this));
