@@ -26,7 +26,7 @@
         android:id="@+id/newconfirmEmail_changeEmail"
         android:hint="@string/confirm_new_email"
 
-        android:layout_below="@+id/currentEmail_changeEmail"
+        android:layout_below="@+id/newEmail_changeEmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         tools:ignore="TextFields" />
@@ -34,9 +34,9 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/currentEmail_changeEmail"
+        android:id="@+id/newEmail_changeEmail"
         android:hint="@string/new_email"
-        android:layout_below="@+id/newEmail_changeEmail"
+        android:layout_below="@+id/currentEmail_changeEmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:inputType=""
@@ -54,7 +54,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/newEmail_changeEmail"
+        android:id="@+id/currentEmail_changeEmail"
         android:hint="@string/current_email"
 
         android:layout_marginTop="37dp"

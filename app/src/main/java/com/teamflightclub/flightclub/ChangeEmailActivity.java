@@ -1,5 +1,6 @@
 package com.teamflightclub.flightclub;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -34,7 +35,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
         changeEmailbutton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 // Log.d("ACCT_CLICK", "You have clicked on the create acct text");
-
+                   changeEmail();
             }
         });
 
@@ -66,6 +67,17 @@ public class ChangeEmailActivity extends AppCompatActivity {
             changeEmailbutton.setEnabled(false);
         } else {
             changeEmailbutton.setEnabled(true);
+        }
+    }
+    public void changeEmail() {
+        String EmailNew = changeEmailNewEmail.getText().toString();
+        String EmailNewConfirm = changeEmailNewConfirmEmail.getText().toString();
+        String EmailCurrent = changeEmailCurrentEmail.getText().toString();
+        if (!EmailNew.equals(EmailNewConfirm)) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("ERROR");
+            alertDialog.setMessage("Emails do not match.");
+            alertDialog.show();
         }
     }
 }
