@@ -84,7 +84,13 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
+        String resultMessage = "";
+        if (result.equals(""))
+            resultMessage = "Username/Password Not Found";
+        else {
+            resultMessage = "Login Successful";
+        }
+        alertDialog.setMessage(resultMessage);
         alertDialog.show();
 
         if (result.equals("Login Successful")) {
