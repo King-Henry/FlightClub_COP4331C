@@ -3,6 +3,9 @@ package com.teamflightclub.flightclub;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,10 +27,14 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
 
     Context context;
     AlertDialog alertDialog;
+    AsyncCallback callback;
 
-    LoginAuthenticator (Context contxt) {
+    String result = "";
+
+    LoginAuthenticator(Context contxt, AsyncCallback asyncCallback) {
 
         context = contxt;
+        callback = asyncCallback;
     }
 
     @Override
@@ -51,7 +58,6 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
             outputStream.close();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-            String result = "";
             String line = "";
             while ((line = bufferedReader.readLine()) != null) {
                 result += line;
@@ -80,12 +86,37 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
         alertDialog.setMessage(result);
         alertDialog.show();
+
+        if (result.equals("Login Successful")) {
+
+            Log.v("LoginActivity", "Login SUCCESFULLLLLL");
+            LoginActivity.LOGIN_RESULT = 1000;
+        } else {
+
+            LoginActivity.LOGIN_RESULT = 0;
+        }
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+
+                alertDialog.dismiss();
+                callback.done();
+            }
+        },2000);
+
+
     }
 
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
-    }
+            @Override
+            protected void onProgressUpdate(Void... values) {
+                super.onProgressUpdate(values);
+            }
+
+
+
 
 }
 
