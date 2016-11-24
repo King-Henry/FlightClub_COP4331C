@@ -23,11 +23,8 @@
         <activity android:name=".ui.ViewPursTicketsActivity" />
         <activity android:name=".ControlPanelActivity" />
         <activity android:name=".LoginActivity" />
-        <activity
-            android:name=".changeEmailActivity"
-            android:label="@string/title_activity_change_email"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ChangePasswordActivity"></activity>
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".ChangeEmailActivity"></activity>
     </application>
 
 </manifest>

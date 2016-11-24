@@ -20,4 +20,14 @@
     <string name="hotels_category"><b>HOTELS</b></string>
     <string name="entertainment_category"><b>ENTERTAINMENT</b></string>
     <string name="title_activity_change_email">changeEmailActivity</string>
+    <string name="new_password">New Password</string>
+    <string name="change_password">Change password</string>
+    <string name="change_password_text">Change password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="current_password">Current password</string>
+    <string name="change_e_mail">Change E-mail</string>
+    <string name="change_email">Change Email</string>
+    <string name="confirm_new_email">Confirm new Email</string>
+    <string name="current_email">Current Email</string>
+    <string name="new_email">New Email</string>
 </resources>

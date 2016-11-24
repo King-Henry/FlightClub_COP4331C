@@ -13,6 +13,7 @@ public class ControlPanelActivity extends AppCompatActivity {
 
         Button viewTicket;
         Button viewChangePassword;
+        Button viewChangeEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -22,6 +23,8 @@ public class ControlPanelActivity extends AppCompatActivity {
         viewTicket = (Button)findViewById(R.id.viewTicket);
 
         viewChangePassword = (Button)findViewById(R.id.changePassword);
+
+        viewChangeEmail = (Button)findViewById(R.id.changeEmail);
         viewTicket.setOnClickListener(new View.OnClickListener() {
 
 
@@ -36,6 +39,12 @@ public class ControlPanelActivity extends AppCompatActivity {
                 openChangePassword();
             }
         });
+        viewChangeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openChangeEmail();
+            }
+        });
 
     }
     public void openTickets(){
@@ -46,5 +55,9 @@ public class ControlPanelActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ChangePasswordActivity.class);
         startActivity(intent);
 
+    }
+    public void openChangeEmail(){
+        Intent intent = new Intent(this, ChangeEmailActivity.class);
+        startActivity(intent);
     }
 }
