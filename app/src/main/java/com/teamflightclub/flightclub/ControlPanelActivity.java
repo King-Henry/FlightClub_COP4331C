@@ -16,17 +16,15 @@ public class ControlPanelActivity extends AppCompatActivity {
         Button viewChangePassword;
         Button viewChangeEmail;
         String rowID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_panel);
-        Toast.makeText(getApplicationContext(), "Login Successful!",Toast.LENGTH_LONG).show();
+
         viewTicket = (Button)findViewById(R.id.viewTicket);
 
-        Intent intent = getIntent();
-        rowID = intent.getStringExtra("rowID");
-        //Log.v("myApp","Row ID = "+rowID);
 
         viewChangePassword = (Button)findViewById(R.id.changePassword);
 
