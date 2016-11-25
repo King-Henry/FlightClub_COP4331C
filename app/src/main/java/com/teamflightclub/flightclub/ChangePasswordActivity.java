@@ -1,7 +1,9 @@
 package com.teamflightclub.flightclub;
 
 import android.app.AlertDialog;
+
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -39,6 +41,7 @@ public class ChangePasswordActivity extends AppCompatActivity{
 
          changePasswordbutton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
+                changePassword();
                // Log.d("ACCT_CLICK", "You have clicked on the create acct text");
                 ChangePasswordClicked();
 
@@ -96,6 +99,18 @@ public class ChangePasswordActivity extends AppCompatActivity{
             changePasswordbutton.setEnabled(false);
         } else {
             changePasswordbutton.setEnabled(true);
+
+        }
+    }
+    public void changePassword() {
+        String passNew = changePasswordNewPassword.getText().toString();
+        String passNewConfirm = changePasswordNewConfirmPass.getText().toString();
+        String passwordCurrent = changePasswordCurrentPass.getText().toString();
+        if (!passNew.equals(passNewConfirm)) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("ERROR");
+            alertDialog.setMessage("Passwords do not match.");
+            alertDialog.show();
         }
     }
 
