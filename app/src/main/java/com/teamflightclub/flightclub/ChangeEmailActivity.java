@@ -1,10 +1,7 @@
 package com.teamflightclub.flightclub;
 
 import android.app.AlertDialog;
-<<<<<<< HEAD
 import android.content.Intent;
-=======
->>>>>>> 68e4b50c32f6052657f9cbe876976617c0fc4fd7
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -42,11 +39,8 @@ public class ChangeEmailActivity extends AppCompatActivity {
         changeEmailbutton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 // Log.d("ACCT_CLICK", "You have clicked on the create acct text");
-<<<<<<< HEAD
                 ChangeEmailClicked();
-=======
                    changeEmail();
->>>>>>> 68e4b50c32f6052657f9cbe876976617c0fc4fd7
             }
         });
 

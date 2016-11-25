@@ -26,10 +26,6 @@
         android:inputType="textWebEmailAddress"
         android:id="@+id/newconfirmEmail_changeEmail"
         android:hint="@string/confirm_new_email"
-<<<<<<< HEAD
-=======
-
->>>>>>> 68e4b50c32f6052657f9cbe876976617c0fc4fd7
         android:layout_below="@+id/newEmail_changeEmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -38,10 +34,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:inputType="textWebEmailAddress"
-=======
->>>>>>> 68e4b50c32f6052657f9cbe876976617c0fc4fd7
         android:id="@+id/newEmail_changeEmail"
         android:hint="@string/new_email"
         android:layout_below="@+id/currentEmail_changeEmail"
