@@ -23,10 +23,10 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textWebEmailAddress"
         android:id="@+id/newconfirmEmail_changeEmail"
         android:hint="@string/confirm_new_email"
-
-        android:layout_below="@+id/currentEmail_changeEmail"
+        android:layout_below="@+id/newEmail_changeEmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         tools:ignore="TextFields" />
@@ -34,12 +34,12 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/currentEmail_changeEmail"
+        android:inputType="textWebEmailAddress"
+        android:id="@+id/newEmail_changeEmail"
         android:hint="@string/new_email"
-        android:layout_below="@+id/newEmail_changeEmail"
+        android:layout_below="@+id/currentEmail_changeEmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:inputType=""
         tools:ignore="TextFields" />
 
     <Button
@@ -54,14 +54,13 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/newEmail_changeEmail"
+        android:id="@+id/currentEmail_changeEmail"
         android:hint="@string/current_email"
-
+        android:inputType="textWebEmailAddress"
         android:layout_marginTop="37dp"
         android:layout_below="@+id/change_Email_text"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:inputType=""
         tools:ignore="TextFields" />
 
 
