@@ -85,8 +85,8 @@ public class ChangeEmailAuthenticator extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-//        String resultMessage = "";
-//        if (result.equals(""))
+        String resultMessage = "";
+        if (result.equals(""))
 //            resultMessage = "Username/Password Not Found";
 //        else {
 //            //rowID = result;

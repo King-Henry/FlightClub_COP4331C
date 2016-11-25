@@ -2,15 +2,15 @@ package com.teamflightclub.flightclub;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class CreateAccountActivity extends AppCompatActivity {
+public class CreateAccountActivity extends AppCompatActivity implements AsyncCallback{
 
     EditText first_input, last_input, email_input, password_input, confirmPassword_input;
     Button creatAcct;
@@ -79,7 +79,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             alertDialog.show();
         }
         else {
-            CreateAccountAuthenticator createAccountAuthenticator = new CreateAccountAuthenticator(this);
+            CreateAccountAuthenticator createAccountAuthenticator = new CreateAccountAuthenticator(this,this);
             createAccountAuthenticator.execute(firstName,lastName,email,password);
         }
     }
@@ -87,5 +87,11 @@ public class CreateAccountActivity extends AppCompatActivity {
     public void returnToLogin(View view){
         Intent returnToLogin = new Intent(this, LoginActivity.class);
         startActivity(returnToLogin);
+    }
+
+    @Override
+    public void done() {
+
+        finish();
     }
 }

@@ -115,7 +115,7 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
                     alertDialog.dismiss();
                     callback.done();
                 }
-            },2000);
+            },1000);
 
         }
 

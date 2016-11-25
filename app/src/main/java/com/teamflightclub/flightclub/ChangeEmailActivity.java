@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ChangeEmailActivity extends AppCompatActivity {
+public class ChangeEmailActivity extends AppCompatActivity implements AsyncCallback{
 
     Button changeEmailbutton;
     TextView changeEmailText;
