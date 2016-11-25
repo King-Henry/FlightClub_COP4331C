@@ -21,7 +21,6 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback {
 
     LoginAuthenticator loginAuthenticator;
 
-   public static int LOGIN_RESULT;
 
 
     @Override
@@ -33,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback {
         password_input = (EditText)findViewById(R.id.password_text);
         login = (Button)findViewById(R.id.login_button);
         login.setEnabled(false);
+
         account_creation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,17 +110,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback {
     @Override
     public void done() {
 
-        if (LOGIN_RESULT == 1000) {
-
-            Intent returnToMainActivity = new Intent();
-            setResult(Activity.RESULT_OK);
-            finish();
-
-        }
-
-            else{
-            //doNothing
-        }
+        setResult(Activity.RESULT_OK);
+        finish();
 
     }
 

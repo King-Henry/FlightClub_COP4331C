@@ -3,6 +3,7 @@ package com.teamflightclub.flightclub;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Handler;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,10 +25,12 @@ public class CreateAccountAuthenticator extends AsyncTask<String,Void,String> {
 
     Context context;
     AlertDialog alertDialog;
+    AsyncCallback callback;
 
-    CreateAccountAuthenticator (Context contxt) {
+    CreateAccountAuthenticator (Context contxt, AsyncCallback asyncCallback) {
 
         context = contxt;
+        callback = asyncCallback;
     }
 
     @Override
@@ -84,6 +87,21 @@ public class CreateAccountAuthenticator extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
         alertDialog.setMessage(result);
         alertDialog.show();
+
+        if(result.contains("Welcome")){
+
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    alertDialog.dismiss();
+                    callback.done();
+                }
+            },1000);
+        }
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.teamflightclub.flightclub;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ChangeEmailActivity extends AppCompatActivity {
+public class ChangeEmailActivity extends AppCompatActivity implements AsyncCallback{
 
     Button changeEmailbutton;
     TextView changeEmailText;
@@ -29,8 +30,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
         changeEmailNewEmail = (EditText)findViewById(R.id.newEmail_changeEmail);
         changeEmailNewConfirmEmail = (EditText)findViewById(R.id.newconfirmEmail_changeEmail);
         changeEmailbutton.setEnabled(false);
-        Intent intent = getIntent();
-        rowID = intent.getStringExtra("rowID");
+        rowID = PreferenceManager.getDefaultSharedPreferences(this).getString("userIDRow","");
 
         changeEmailCurrentEmail.addTextChangedListener( mTextWatcher);
         changeEmailNewEmail.addTextChangedListener( mTextWatcher);

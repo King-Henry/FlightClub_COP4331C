@@ -9,11 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String rowID = "";
 
     Button flightsCategory;
     Button hotelsCategory;
@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     boolean hideSignInButton;
     boolean disableNotLoggedInButtons;
 
-    private static int SIGN_IN_REQUEST = 1000;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
         myCart = (Button)findViewById(R.id.my_cart_bar_button);
         myAccount = (Button)findViewById(R.id.my_account_bar_button);
         settings = (Button)findViewById(R.id.settings_bar_button);
+
+        myAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent toMyAccount = new Intent(MainActivity.this, ControlPanelActivity.class);
+                startActivity(toMyAccount);
+            }
+        });
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -56,16 +63,14 @@ public class MainActivity extends AppCompatActivity {
 
         super.onResume();
 
+        if(sharedPreferences.contains("userRowID")){ // SharedPreferences contains the row for the user being logged in
 
 
-        if(sharedPreferences.contains("isUserLoggedIn")){ // SharedPreferences contains the key for the user being logged in
+            String userID = sharedPreferences.getString("userRowID",""); // get the value for if user is logged in(true or false)
 
+            Log.v("userRowID", " " + userID);
 
-            boolean userLoggedIn = sharedPreferences.getBoolean("isUserLoggedIn", false); // get the value for if user is logged in(true or false)
-
-            Log.v("userLoggedIn value", " " + userLoggedIn);
-
-            if(userLoggedIn){ //if user logged in
+            if(!sharedPreferences.getString("userRowID","").isEmpty()){ //if user logged in
 
                 hideSignInButton = true;
                 invalidateOptionsMenu(); // launch Menu Android methods so that you can disable Sign In menu button
@@ -83,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         else{ //if key for user login state is not in sharedPreferences
 
-            sharedPreferences.edit().putBoolean("isUserLoggedIn",false).commit(); //add key and boolean value to SharedPreferences
+            sharedPreferences.edit().putString("userRowID","").commit(); //add key and boolean value to SharedPreferences
             myCart.setEnabled(false); // disable My Cart button
             myAccount.setEnabled(false); //disable My Account button
         }
@@ -119,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.sign_in_edit_button:
 
                 Intent goToSignInActivity = new Intent(this,LoginActivity.class);
-                startActivityForResult(goToSignInActivity,SIGN_IN_REQUEST);
+                startActivity(goToSignInActivity);
 
             default:
 
@@ -127,22 +132,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        Log.v("onActivityResult", "is this called?");
-
-        if(requestCode == SIGN_IN_REQUEST){
-
-            if(resultCode == RESULT_OK){
-
-                sharedPreferences.edit().putBoolean("isUserLoggedIn", true).commit();
-
-                Log.v("onActivityResult", "Was preference updated?");
-            }
-        }
-    }
 
 }
 

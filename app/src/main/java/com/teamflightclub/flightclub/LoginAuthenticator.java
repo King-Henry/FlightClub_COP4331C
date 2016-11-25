@@ -3,8 +3,10 @@ package com.teamflightclub.flightclub;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -85,38 +87,41 @@ public class LoginAuthenticator extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
         String resultMessage = "";
-        if (result.equals(""))
+        if (result.equals("")) {
             resultMessage = "Username/Password Not Found";
+            alertDialog.setMessage(resultMessage);
+            alertDialog.show();
+            Log.v("Login failed", "resultMessage");
+        }
+
         else {
             //rowID = result;
-            //Log.v("myApp","Row ID = "+result);
+            Log.v("myApp","Row ID = "+result);
             resultMessage = "Login Successful";
-            Intent intent = new Intent(context, ControlPanelActivity.class);
-            intent.putExtra("rowID",result);
-            context.startActivity(intent);
-        }
-        alertDialog.setMessage(resultMessage);
-        alertDialog.show();
-
-        if (result.equals("Login Successful")) {
-
+            //Intent intent = new Intent(context, ControlPanelActivity.class);
+            //intent.putExtra("rowID",result);
+            //context.startActivity(intent);
+            alertDialog.setMessage(resultMessage);
+            alertDialog.show();
             Log.v("LoginActivity", "Login SUCCESFULLLLLL");
-            LoginActivity.LOGIN_RESULT = 1000;
-        } else {
+            PreferenceManager.getDefaultSharedPreferences(context).edit().putString("userRowID",result).commit();
 
-            LoginActivity.LOGIN_RESULT = 0;
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    alertDialog.dismiss();
+                    callback.done();
+                }
+            },1000);
+
         }
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
 
-                alertDialog.dismiss();
-                callback.done();
-            }
-        },2000);
+
 
 
     }
