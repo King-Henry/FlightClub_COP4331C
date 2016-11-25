@@ -66,6 +66,7 @@ public class ControlPanelActivity extends AppCompatActivity {
     }
     public void openChangeEmail(){
         Intent intent = new Intent(this, ChangeEmailActivity.class);
+        intent.putExtra("rowID",rowID);
         startActivity(intent);
     }
 }

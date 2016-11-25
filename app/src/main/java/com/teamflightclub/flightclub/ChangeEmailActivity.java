@@ -1,5 +1,11 @@
 package com.teamflightclub.flightclub;
 
+import android.support.v7.app.AppCompatActivity;
+
+
+import android.app.AlertDialog;
+import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -16,6 +22,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
     EditText changeEmailCurrentEmail;
     EditText changeEmailNewEmail;
     EditText changeEmailNewConfirmEmail;
+    String rowID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,8 @@ public class ChangeEmailActivity extends AppCompatActivity {
         changeEmailNewEmail = (EditText)findViewById(R.id.newEmail_changeEmail);
         changeEmailNewConfirmEmail = (EditText)findViewById(R.id.newconfirmEmail_changeEmail);
         changeEmailbutton.setEnabled(false);
+        Intent intent = getIntent();
+        rowID = intent.getStringExtra("rowID");
 
         changeEmailCurrentEmail.addTextChangedListener( mTextWatcher);
         changeEmailNewEmail.addTextChangedListener( mTextWatcher);
@@ -34,6 +43,9 @@ public class ChangeEmailActivity extends AppCompatActivity {
         changeEmailbutton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 // Log.d("ACCT_CLICK", "You have clicked on the create acct text");
+
+                ChangeEmailClicked();
+
 
             }
         });
@@ -53,6 +65,29 @@ public class ChangeEmailActivity extends AppCompatActivity {
             checkText();
         }
     };
+
+    public void ChangeEmailClicked(){
+        String oldEmail = changeEmailCurrentEmail.getText().toString();
+        String newEmail = changeEmailNewEmail.getText().toString();
+        String confirmEmail = changeEmailNewConfirmEmail.getText().toString();
+        //Log.v("myApp","Row ID = "+rowID);
+        if (!newEmail.equals(confirmEmail)) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("ERROR");
+            alertDialog.setMessage("Emails do not match.");
+            alertDialog.show();
+        }
+        else if (oldEmail.equals("") || newEmail.equals("") || confirmEmail.equals("")){
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("ERROR");
+            alertDialog.setMessage("Please enter all fields.");
+            alertDialog.show();
+        }
+        else {
+            ChangeEmailAuthenticator changeEmailAuthenticator = new ChangeEmailAuthenticator(this);
+            changeEmailAuthenticator.execute(rowID,oldEmail,newEmail);
+        }
+    }
 
     public void checkText()
     {
