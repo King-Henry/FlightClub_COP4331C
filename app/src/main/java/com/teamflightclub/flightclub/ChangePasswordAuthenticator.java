@@ -3,6 +3,7 @@ package com.teamflightclub.flightclub;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Handler;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,13 +25,14 @@ public class ChangePasswordAuthenticator extends AsyncTask<String,Void,String> {
 
     Context context;
     AlertDialog alertDialog;
-//    AsyncCallback callback;
+    AsyncCallback callback;
     String result = "";
 
 
 
-    ChangePasswordAuthenticator(Context contxt) {
+    ChangePasswordAuthenticator(Context contxt,AsyncCallback asyncCallback) {
 
+        callback = asyncCallback;
         context = contxt;
     }
 
@@ -82,39 +84,24 @@ public class ChangePasswordAuthenticator extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-//        String resultMessage = "";
-//        if (result.equals(""))
-//            resultMessage = "Username/Password Not Found";
-//        else {
-//            //rowID = result;
-//            resultMessage = "Login Successful";
-//            Intent intent = new Intent(context, ControlPanelActivity.class);
-//            intent.putExtra("rowID",result);
-//            context.startActivity(intent);
-//        }
+//
         alertDialog.setMessage(result);
         alertDialog.show();
 
-//        if (result.equals("Password Change Successful")) {
+        if (result.equals("Password Change Successful")) {
 //
-//            Log.v("ChangePassword", "Password CHANGED");
-//            //LoginActivity.LOGIN_RESULT = 1000;
-//        } else {
-//
-//            //LoginActivity.LOGIN_RESULT = 0;
-//        }
-//
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//
-//                alertDialog.dismiss();
-//                //callback.done();
-//            }
-//        },2000);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
 
+                @Override
+                public void run() {
+
+                    alertDialog.dismiss();
+                    callback.done();
+                }
+            }, 1000);
+
+        }
 
     }
 
