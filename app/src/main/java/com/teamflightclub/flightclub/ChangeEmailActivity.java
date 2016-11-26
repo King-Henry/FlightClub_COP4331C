@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +32,8 @@ public class ChangeEmailActivity extends AppCompatActivity implements AsyncCallb
         changeEmailNewEmail = (EditText)findViewById(R.id.newEmail_changeEmail);
         changeEmailNewConfirmEmail = (EditText)findViewById(R.id.newconfirmEmail_changeEmail);
         changeEmailbutton.setEnabled(false);
-        rowID = PreferenceManager.getDefaultSharedPreferences(this).getString("userIDRow","");
+        rowID = PreferenceManager.getDefaultSharedPreferences(this).getString("userRowID","");
+        Log.v("ChangeEmailActivityID", rowID);
 
         changeEmailCurrentEmail.addTextChangedListener( mTextWatcher);
         changeEmailNewEmail.addTextChangedListener( mTextWatcher);
@@ -47,6 +50,7 @@ public class ChangeEmailActivity extends AppCompatActivity implements AsyncCallb
         });
 
     }
+
     TextWatcher mTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -80,7 +84,7 @@ public class ChangeEmailActivity extends AppCompatActivity implements AsyncCallb
             alertDialog.show();
         }
         else {
-            ChangeEmailAuthenticator changeEmailAuthenticator = new ChangeEmailAuthenticator(this);
+            ChangeEmailAuthenticator changeEmailAuthenticator = new ChangeEmailAuthenticator(this,this);
             changeEmailAuthenticator.execute(rowID,oldEmail,newEmail);
         }
     }
@@ -100,5 +104,11 @@ public class ChangeEmailActivity extends AppCompatActivity implements AsyncCallb
         }
     }
 
+    @Override
+    public void done() {
+
+
+        finish();
+    }
 }
 

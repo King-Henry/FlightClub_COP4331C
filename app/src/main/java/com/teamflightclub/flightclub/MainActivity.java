@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
             else{
 
                 disableNotLoggedInButtons = true;
+                hideSignInButton = false;
+                invalidateOptionsMenu();
                 myCart.setEnabled(false); // disable My Cart button
                 myAccount.setEnabled(false); //disable My Account button
             }
@@ -106,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
+        Log.v("onPrepareOptionMenus", "has been called");
         if(hideSignInButton){ //
 
             menu.getItem(0).setEnabled(false); // hide sign in button

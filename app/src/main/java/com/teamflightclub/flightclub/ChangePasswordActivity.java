@@ -3,6 +3,7 @@ package com.teamflightclub.flightclub;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ChangePasswordActivity extends AppCompatActivity{
+public class ChangePasswordActivity extends AppCompatActivity implements AsyncCallback{
     Button changePasswordbutton;
     TextView changePasswordText;
     EditText changePasswordCurrentPass;
@@ -28,8 +29,7 @@ public class ChangePasswordActivity extends AppCompatActivity{
          changePasswordNewPassword = (EditText)findViewById(R.id.newPassword_changepassword);
          changePasswordNewConfirmPass = (EditText)findViewById(R.id.newconfirmPassword_changepassword);
          changePasswordbutton.setEnabled(false);
-        Intent intent = getIntent();
-        rowID = intent.getStringExtra("rowID");
+         rowID = PreferenceManager.getDefaultSharedPreferences(this).getString("userRowID","");
         //Log.v("myApp","Row ID = "+rowID);
 
         changePasswordCurrentPass.addTextChangedListener( mTextWatcher);
@@ -78,7 +78,7 @@ public class ChangePasswordActivity extends AppCompatActivity{
             alertDialog.show();
         }
         else {
-            ChangePasswordAuthenticator changePasswordAuthenticator = new ChangePasswordAuthenticator(this);
+            ChangePasswordAuthenticator changePasswordAuthenticator = new ChangePasswordAuthenticator(this,this);
             changePasswordAuthenticator.execute(rowID,oldPassword,newPassword);
         }
     }
@@ -100,9 +100,10 @@ public class ChangePasswordActivity extends AppCompatActivity{
     }
 
 
-//    @Override
-//    public void done() {
-//        finish();
-//    }
+    @Override
+    public void done() {
+
+       finish();
+    }
 }
 
