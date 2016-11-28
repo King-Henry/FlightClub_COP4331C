@@ -17,32 +17,17 @@ import java.util.ArrayList;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.SearchListViewHolder> {
 
-    public static class Data{
 
-        String text;
-        int icon;
-    }
-
-    ArrayList<Data> datas;
+    ArrayList<Flight> flights;
 
     public SearchResultsAdapter(){
 
-        datas = new ArrayList<Data>();
+        flights = new ArrayList<Flight>();
 
-        String[] strings = {"Tim", "Cary","Tommy","Hung","Brandon", "Tim", "Cary","Tommy","Hung","Brandon","Tim", "Cary","Tommy","Hung","Brandon","Tim", "Cary","Tommy","Hung","Brandon"};
-        int[] icons = {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher, R.mipmap.ic_launcher
-                ,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,R.mipmap.ic_launcher};
-
-        for(int i =0; i< strings.length;i++){
-
-            Data data = new Data();
-            data.text = strings[i];
-            data.icon = icons[i];
-            datas.add(data);
-        }
-
+        //populate ArrayList
     }
+
+
 
     @Override
     public SearchListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -56,29 +41,35 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     @Override
     public void onBindViewHolder(SearchListViewHolder holder, int position) {
 
-        Data data = datas.get(position);
-        holder.imageView.setImageResource(data.icon);
-        holder.textView.setText(data.text);
+        Flight flight = flights.get(position);
+
+        //bind views with information
     }
 
     @Override
     public int getItemCount() {
 
-        return datas.size();
+        return flights.size();
     }
 
     public static class SearchListViewHolder extends RecyclerView.ViewHolder{
 
         CardView cardView;
-        TextView textView;
-        ImageView imageView;
+        TextView airlineCompany;
+        TextView flightDepartureTime;
+        TextView flightArrivalTime;
+        TextView flightPrice;
+        TextView fromToDestinationName;
 
         public SearchListViewHolder(View viewHolderLayout){
 
             super(viewHolderLayout);
-            cardView = (CardView)viewHolderLayout.findViewById(R.id.card_view);
-            textView = (TextView)viewHolderLayout.findViewById(R.id.text_view);
-            imageView = (ImageView)viewHolderLayout.findViewById(R.id.image_view);
+            cardView = (CardView)viewHolderLayout.findViewById(R.id.flight_card_view);
+            airlineCompany = (TextView)viewHolderLayout.findViewById(R.id.airline_name);
+            flightDepartureTime = (TextView) viewHolderLayout.findViewById(R.id.departure_time);
+            flightArrivalTime = (TextView)viewHolderLayout.findViewById(R.id.arrival_time);
+            flightPrice = (TextView)viewHolderLayout.findViewById(R.id.trip_price);
+            fromToDestinationName = (TextView)viewHolderLayout.findViewById(R.id.departure_arrival_names);
         }
     }
 }
