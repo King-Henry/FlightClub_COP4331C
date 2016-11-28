@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,9 +101,7 @@ public class ChangeEmailActivity extends AppCompatActivity implements AsyncCallb
             changeEmailbutton.setEnabled(true);
         }
     }
-    public void done(){
 
-    }
 
     @Override
     public void done() {

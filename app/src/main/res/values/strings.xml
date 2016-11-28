@@ -30,5 +30,7 @@
     <string name="confirm_new_email">Confirm new Email</string>
     <string name="current_email">Current Email</string>
     <string name="new_email">New Email</string>
-    <string name = "sign_out">Sign Out</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="name">Name</string>
+    <string name="button">Button</string>
 </resources>

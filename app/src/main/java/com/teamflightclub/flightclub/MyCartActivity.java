@@ -1,4 +1,4 @@
-package com.teamflightclub.flightclub.ui;
+package com.teamflightclub.flightclub;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,19 +9,16 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
 
-import com.teamflightclub.flightclub.MainActivity;
-import com.teamflightclub.flightclub.PrePaymentSystemActivity;
-import com.teamflightclub.flightclub.R;
-import com.teamflightclub.flightclub.adapter.AdapterRecPurchaseHistory;
+import com.teamflightclub.flightclub.adapter.AdapterRecPaymentSystem;
 import com.teamflightclub.flightclub.model.ListItem;
 import com.teamflightclub.flightclub.model.getSqldata;
 
 import java.util.ArrayList;
 
-public class ViewPursTicketsActivity extends AppCompatActivity implements AdapterRecPurchaseHistory.ItemClickCallback {
+public class MyCartActivity extends AppCompatActivity implements AdapterRecPaymentSystem.ItemClickCallback {
 
     private RecyclerView recView;
-    private AdapterRecPurchaseHistory adapter;
+    private AdapterRecPaymentSystem adapter;
     private ArrayList listData;
     Button returnBTN;
 
@@ -33,7 +30,7 @@ public class ViewPursTicketsActivity extends AppCompatActivity implements Adapte
         recView = (RecyclerView) findViewById(R.id.rec_list);
         //LayoutManager: GridLayoutManager or StaggeredGridLayoutManager
         recView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AdapterRecPurchaseHistory(listData, this);
+        adapter = new AdapterRecPaymentSystem(listData, this);
         adapter.setItemClickCallback(this);
         recView.setAdapter(adapter);
 
@@ -44,7 +41,7 @@ public class ViewPursTicketsActivity extends AppCompatActivity implements Adapte
             @Override
             public void onClick(View v) {
 
-                moveMainActivity();
+            moveMainActivity();
             }
         });
     }
@@ -73,7 +70,7 @@ public class ViewPursTicketsActivity extends AppCompatActivity implements Adapte
 
                     @Override
                     public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                        deleteItem(viewHolder.getAdapterPosition());
+                                deleteItem(viewHolder.getAdapterPosition());
                     }
                 };
         return simpleItemTouchCallback;

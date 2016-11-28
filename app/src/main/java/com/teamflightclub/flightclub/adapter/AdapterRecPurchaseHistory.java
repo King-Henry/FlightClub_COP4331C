@@ -16,12 +16,22 @@ import java.util.List;
  * Created by Gio on 11/23/2016.
  */
 
-public class AdapterRec extends RecyclerView.Adapter<AdapterRec.Holder> {
+public class AdapterRecPurchaseHistory extends RecyclerView.Adapter<AdapterRecPurchaseHistory.Holder> {
 
     private List<ListItem> listData;
     private LayoutInflater inflater;
 
-    public AdapterRec (List<ListItem> listData, Context c) {
+    private ItemClickCallback itemClickCallback;
+
+    public interface ItemClickCallback{
+        void onItemClick(int p);
+    }
+
+    public void setItemClickCallback(final ItemClickCallback itemClickCallback){
+        this.itemClickCallback = itemClickCallback;
+    }
+
+    public AdapterRecPurchaseHistory (List<ListItem> listData, Context c) {
         this.inflater = LayoutInflater.from(c);
         this.listData = listData;
     }
@@ -45,7 +55,7 @@ public class AdapterRec extends RecyclerView.Adapter<AdapterRec.Holder> {
         return listData.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder{
+    class Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView title;
         private ImageView icon;
@@ -57,8 +67,17 @@ public class AdapterRec extends RecyclerView.Adapter<AdapterRec.Holder> {
             title = (TextView)itemView.findViewById(R.id.lbl_item_text);
             icon = (ImageView)itemView.findViewById(R.id.im_item_icon);
             container = itemView.findViewById(R.id.cont_item_root);
+            container.setOnClickListener(this);
+            icon.setOnClickListener(this);
+
+
+
         }
 
+        @Override
+        public void onClick(View view) {
+            itemClickCallback.onItemClick(getAdapterPosition());
+        }
     }
 }
 

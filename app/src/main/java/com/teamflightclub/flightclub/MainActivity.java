@@ -49,7 +49,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(toMyAccount);
             }
         });
+        myCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent toMyCart = new Intent(MainActivity.this, MyCartActivity.class);
+                startActivity(toMyCart);
+            }
+        });
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         Log.v("OnCreate", "OnCreate is called");
