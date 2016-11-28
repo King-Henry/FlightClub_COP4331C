@@ -26,7 +26,8 @@
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".ChangeEmailActivity" />
         <activity android:name=".MyCartActivity" />
-        <activity android:name=".PrePaymentSystemActivity"></activity>
+        <activity android:name=".PrePaymentSystemActivity" />
+        <activity android:name=".PaymentSystemActivity"></activity>
     </application>
 
 </manifest>
