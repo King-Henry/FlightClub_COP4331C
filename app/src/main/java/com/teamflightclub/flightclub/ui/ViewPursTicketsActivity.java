@@ -6,11 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.View;
 import android.widget.Button;
 
-import com.teamflightclub.flightclub.MainActivity;
-import com.teamflightclub.flightclub.PrePaymentSystemActivity;
+import com.teamflightclub.flightclub.ControlPanelActivity;
+import com.teamflightclub.flightclub.DisplayPursTicketInformationActivity;
 import com.teamflightclub.flightclub.R;
 import com.teamflightclub.flightclub.adapter.AdapterRecPurchaseHistory;
 import com.teamflightclub.flightclub.model.ListItem;
@@ -28,7 +27,7 @@ public class ViewPursTicketsActivity extends AppCompatActivity implements Adapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_cart);
+        setContentView(R.layout.view_purs_ticket);
         listData = (ArrayList) getSqldata.getListData();
         recView = (RecyclerView) findViewById(R.id.rec_list);
         //LayoutManager: GridLayoutManager or StaggeredGridLayoutManager
@@ -39,14 +38,16 @@ public class ViewPursTicketsActivity extends AppCompatActivity implements Adapte
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
         itemTouchHelper.attachToRecyclerView(recView);
-        returnBTN = (Button) findViewById(R.id.btn_return_item);
-        returnBTN.setOnClickListener(new View.OnClickListener() {
+        /*
+       returnBTN = (Button) findViewById(R.id.btn_return_item);
+       returnBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                moveMainActivity();
+                moveControlActivity();
             }
         });
+        */
     }
 
 
@@ -54,7 +55,7 @@ public class ViewPursTicketsActivity extends AppCompatActivity implements Adapte
     public void onItemClick(int p) {
         ListItem item = (ListItem) listData.get(p);
 
-        Intent intent = new Intent(this, PrePaymentSystemActivity.class);
+        Intent intent = new Intent(this, DisplayPursTicketInformationActivity.class);
         startActivity(intent);
 
     }
@@ -84,8 +85,8 @@ public class ViewPursTicketsActivity extends AppCompatActivity implements Adapte
         listData.remove(position);
         adapter.notifyItemRemoved(position);
     }
-    public void moveMainActivity(){
-        Intent main = new Intent(this, MainActivity.class);
+    public void moveControlActivity(){
+        Intent main = new Intent(this, ControlPanelActivity.class);
         startActivity(main);
     }
 }
