@@ -9,8 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -43,8 +48,9 @@ public class SearchActivity extends AppCompatActivity {
         returnDate = (EditText)findViewById(R.id.flight_return_date);
         departureDate = (EditText)findViewById(R.id.flight_departure_date);
         searchButton = (Button)findViewById(R.id.search_button);
+        numOfTickets = (EditText)findViewById(R.id.number_of_tickets);
 
-
+        numOfTicketsFormatter();
 
         String[] airports = getResources().getStringArray(R.array.airports_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,airports);
@@ -58,6 +64,7 @@ public class SearchActivity extends AppCompatActivity {
                 numberOfTimesCalled = 0;
                 android.support.v4.app.DialogFragment dialogFragment = new DatePickerFragment();
                 dialogFragment.show(getSupportFragmentManager(),"datePicker");
+
             }
         });
 
@@ -84,6 +91,14 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Log.v("Search Button", "has been clicked");
+                try {
+                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+                    Log.v("close keyboard", "closing keyboard??");
+                }catch(Exception e){
+
+                    //do nothing
+                }
                 loadingToResults();
             }
         });
@@ -101,10 +116,36 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void run() {
                 spinningLoaderRoot.setVisibility(View.GONE);
-                searchResults.setVisibility(View.VISIBLE);
+
+                if(searchResults.getVisibility() == View.INVISIBLE) {
+
+                    searchResults.setVisibility(View.VISIBLE);
+                }
             }
         }, 4000);
     }
+
+    public void numOfTicketsFormatter(){
+
+        numOfTickets.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                numOfTickets.setGravity(Gravity.RIGHT);
+            }
+        });
+    }
+
 
     public static void setDepartureDate(int year, int month, int dayOfMonth){
 
