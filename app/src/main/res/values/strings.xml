@@ -30,5 +30,10 @@
     <string name="confirm_new_email">Confirm new Email</string>
     <string name="current_email">Current Email</string>
     <string name="new_email">New Email</string>
-    <string name = "sign_out">Sign Out</string>
+    <string name="sign_out">Sign Out</string>
+
+    <string-array name="airports_array">
+        <item>MCO(Orlando Int\'l Airport)</item>
+        <item>JFK(John F. Kennedy Int\'l)</item>
+    </string-array>
 </resources>

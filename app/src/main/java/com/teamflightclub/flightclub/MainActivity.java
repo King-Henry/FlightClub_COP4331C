@@ -50,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        flightsCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent goToFlightSearch = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(goToFlightSearch);
+            }
+        });
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         Log.v("OnCreate", "OnCreate is called");
