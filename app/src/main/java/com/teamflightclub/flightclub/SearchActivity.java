@@ -35,6 +35,10 @@ public class SearchActivity extends AppCompatActivity {
     Button searchButton;
     RecyclerView searchResults;
 
+    static int depYear;
+    static int depMonth;
+    static int depDay;
+
     FrameLayout spinningLoaderRoot;
 
     public static SearchResultsAdapter searchResultsAdapter;
@@ -132,8 +136,9 @@ public class SearchActivity extends AppCompatActivity {
 
         int month = Integer.parseInt(date.substring(0,2));
 
-        SearchResultsAdapter.departureDate = monthName[month - 1] + " " + date.substring(3,5) + ", " + date.substring(6);
-        Log.v("date", monthName[month - 1] + " " + date.substring(3,5) + ", " + date.substring(6));
+        //SearchResultsAdapter.departureDate = monthName[month - 1] + " " + date.substring(3,5) + ", " + date.substring(6);
+        SearchResultsAdapter.departureDate = monthName[depMonth-1] + " " + depDay + ", "+depYear;
+        Log.v("date", SearchResultsAdapter.departureDate);
     }
 
     public void populateURLData(){
@@ -193,6 +198,9 @@ public class SearchActivity extends AppCompatActivity {
     public static void setDepartureDate(int year, int month, int dayOfMonth){
 
         departureDate.setText(month + "/" + dayOfMonth + "/" + year);
+        depYear = year;
+        depMonth = month;
+        depDay = dayOfMonth;
     }
 
     public static void setReturnDate(int year, int month, int dayOfMonth){
