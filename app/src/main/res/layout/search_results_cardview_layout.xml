@@ -22,7 +22,6 @@
                 android:id = "@+id/airline_name"
                 android:layout_alignParentTop="true"
                 android:textSize="20sp"
-                android:text="HELLO"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
                 android:paddingLeft="5dp"
@@ -32,7 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:text="HELLO"
                 android:id = "@+id/departure_time"
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"/>
@@ -46,7 +44,6 @@
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:id = "@+id/trip_price"
-                android:text="$400"
                 android:textSize="20sp"/>
 
             <TextView
@@ -54,7 +51,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:id = "@+id/departure_arrival_names"
-                android:text="MCO to JFK"
                 android:textSize="15sp"/>
 
             <TextView
@@ -62,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:text="TIME"
+
                 android:id = "@+id/arrival_time"
                 android:paddingRight="5dp"
                 android:paddingBottom="5dp"

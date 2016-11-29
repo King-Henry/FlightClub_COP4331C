@@ -9,6 +9,7 @@ public class Flight {
     String airlineName;
     String departureTime;
     String arrivalTime;
-    String price;
+    double price;
     String fromNameToDestName;
+    int ID;
 }

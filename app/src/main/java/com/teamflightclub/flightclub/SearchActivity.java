@@ -23,6 +23,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import java.util.ArrayList;
+
 public class SearchActivity extends AppCompatActivity {
 
     AutoCompleteTextView airportDeparture;
@@ -34,6 +36,12 @@ public class SearchActivity extends AppCompatActivity {
     RecyclerView searchResults;
 
     FrameLayout spinningLoaderRoot;
+
+    public static SearchResultsAdapter searchResultsAdapter;
+
+    ArrayList<Flight> flights;
+
+
 
     public static int editTextIdentifier = 0;
     public static int numberOfTimesCalled = 0;
@@ -68,7 +76,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-
         returnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,11 +86,13 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        flights = new ArrayList<Flight>();
+
         searchResults = (RecyclerView)findViewById(R.id.search_results_recycler_view);
         searchResults.setVisibility(View.INVISIBLE);
         searchResults.setLayoutManager(new LinearLayoutManager(this));
         searchResults.setHasFixedSize(true);
-        SearchResultsAdapter searchResultsAdapter = new SearchResultsAdapter();
+        searchResultsAdapter = new SearchResultsAdapter(flights);
         searchResults.setAdapter(searchResultsAdapter);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -99,10 +108,41 @@ public class SearchActivity extends AppCompatActivity {
 
                     //do nothing
                 }
+                shortToExtendedDateFormatter();
+                populateURLData();
                 loadingToResults();
             }
         });
 
+    }
+
+
+
+
+
+
+
+    public void shortToExtendedDateFormatter(){
+
+        int[] monthNum = {1,2,3,4,5,6,7,8,9,10,11,12};
+        String[] monthName = { "January" ,"February" , "March" , "April", "May", "June", "July", "August",
+                    "September","October","November","December"};
+
+        String date = departureDate.getText().toString();
+
+        int month = Integer.parseInt(date.substring(0,2));
+
+        SearchResultsAdapter.departureDate = monthName[month - 1] + " " + date.substring(3,5) + ", " + date.substring(6);
+        Log.v("date", monthName[month - 1] + " " + date.substring(3,5) + ", " + date.substring(6));
+    }
+
+    public void populateURLData(){
+
+        Log.v("airportDeparture", airportDeparture.getText().toString().substring(0,3));
+
+        SearchResultsAdapter.departureAirportCode = airportDeparture.getText().toString().substring(0,3);
+        SearchResultsAdapter.arrivalAirportCode = airportArrival.getText().toString().substring(0,3);
+        searchResultsAdapter.passengers = numOfTickets.getText().toString();
     }
 
     public void loadingToResults(){
@@ -110,6 +150,9 @@ public class SearchActivity extends AppCompatActivity {
         Log.v("loadingToResults", "This is called");
         spinningLoaderRoot = (FrameLayout)findViewById(R.id.progress_bar_root);
         spinningLoaderRoot.setVisibility(View.VISIBLE);
+
+
+        new SearchResultsAdapter.FetchtheFlights().execute();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
