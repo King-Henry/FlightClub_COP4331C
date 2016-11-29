@@ -31,6 +31,7 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
     Spinner states;
     TextView statesText;
     Button payment;
+    boolean q=false;
     CardValidCallback cardValidCallback = new CardValidCallback() {
         @Override
         public void cardValid(CreditCard card) {
@@ -75,8 +76,7 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
 
         final CreditCardForm zipForm = (CreditCardForm) findViewById(R.id.form_with_zip);
         zipForm.setOnCardValidCallback(cardValidCallback);
-        states.setVisibility(View.INVISIBLE);
-        statesText.setVisibility(View.INVISIBLE);
+
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -84,18 +84,25 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
         String item = parent.getItemAtPosition(position).toString();
 
         // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-        if (item.equals("United States") || !countries.contains(item)) {
-            states.setVisibility(View.VISIBLE);
-            statesText.setVisibility(View.VISIBLE);
-        }
-        else{
-            states.setVisibility(View.INVISIBLE);
-            statesText.setVisibility(View.INVISIBLE);
+     //   if (q==true)
+      //      Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        if (countries.contains(item)) {
+     //       Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+            if (item.equals("United States")) {
+                states.setVisibility(View.VISIBLE);
+                statesText.setVisibility(View.VISIBLE);
+                q=true;
+            } else {
+                states.setVisibility(View.INVISIBLE);
+                statesText.setVisibility(View.INVISIBLE);
+                q=false;
+            }
+
         }
     }
     public void onNothingSelected(AdapterView<?> arg0) {
-
+        states.setVisibility(View.INVISIBLE);
+        statesText.setVisibility(View.INVISIBLE);
 
     }
     public ArrayList<String> getStates(ArrayList<String> list){
