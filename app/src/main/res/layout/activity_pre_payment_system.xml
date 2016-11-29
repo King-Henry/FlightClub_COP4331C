@@ -20,16 +20,12 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Button"
+        android:text="Continue to purchase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/pay_btn"
+        android:layout_marginTop="16dp"
         android:layout_below="@+id/textView"
         android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_marginRight="42dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginTop="32dp"
-        android:id="@+id/pay_btn"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_alignEnd="@+id/textView" />
 </RelativeLayout>

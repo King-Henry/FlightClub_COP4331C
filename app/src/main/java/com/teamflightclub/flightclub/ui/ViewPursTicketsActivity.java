@@ -8,8 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.Button;
 
-import com.teamflightclub.flightclub.ControlPanelActivity;
-import com.teamflightclub.flightclub.DisplayPursTicketInformationActivity;
+import com.teamflightclub.flightclub.DisplayPursTicketInformation;
 import com.teamflightclub.flightclub.R;
 import com.teamflightclub.flightclub.adapter.AdapterRecPurchaseHistory;
 import com.teamflightclub.flightclub.model.ListItem;
@@ -55,8 +54,7 @@ public class ViewPursTicketsActivity extends AppCompatActivity implements Adapte
     public void onItemClick(int p) {
         ListItem item = (ListItem) listData.get(p);
 
-        Intent intent = new Intent(this, DisplayPursTicketInformationActivity.class);
-        startActivity(intent);
+        moveDisplayActivity();
 
     }
 
@@ -85,8 +83,8 @@ public class ViewPursTicketsActivity extends AppCompatActivity implements Adapte
         listData.remove(position);
         adapter.notifyItemRemoved(position);
     }
-    public void moveControlActivity(){
-        Intent main = new Intent(this, ControlPanelActivity.class);
-        startActivity(main);
+    public void moveDisplayActivity(){
+        Intent intent = new Intent(this, DisplayPursTicketInformation.class);
+        startActivity(intent);
     }
 }

@@ -28,7 +28,7 @@
         <activity android:name=".MyCartActivity" />
         <activity android:name=".PrePaymentSystemActivity" />
         <activity android:name=".PaymentSystemActivity" />
-        <activity android:name=".DisplayPursTicketInformationActivity"></activity>
+        <activity android:name=".DisplayPursTicketInformation"></activity>
     </application>
 
 </manifest>

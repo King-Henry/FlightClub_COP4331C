@@ -3,7 +3,7 @@ package com.teamflightclub.flightclub;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class DisplayPursTicketInformationActivity extends AppCompatActivity {
+public class DisplayPursTicketInformation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
