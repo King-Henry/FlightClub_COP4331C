@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView4"
-        android:text="Please enter your state"
+        android:text="Please Enter Your State"
         android:layout_above="@+id/spinner"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
-        android:text="First name on credit card"
+        android:text="First Name On Credit Card"
         android:layout_marginTop="64dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -145,15 +145,6 @@
         android:textSize="32sp"
         />
 
-    <Button
-        android:text="Pay Ticket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/form_with_zip"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -162,6 +153,16 @@
         android:layout_below="@+id/editText2"
         android:layout_alignRight="@+id/textView2"
         android:layout_alignEnd="@+id/textView2" />
+
+    <Button
+        android:text="Pay Ticket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_marginTop="82dp"
+        android:layout_below="@+id/form_with_zip"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3" />
 
 
 </RelativeLayout>
