@@ -62,7 +62,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         holder.airlineCompany.setText(flights.get(position).airlineName);
         holder.flightDepartureTime.setText(flights.get(position).departureTime);
         holder.flightArrivalTime.setText(flights.get(position).arrivalTime);
-        holder.flightPrice.setText("$" + Double.toString(flights.get(position).price));
+        String price = "$" + String.format("%.2f",flights.get(position).price);
+        holder.flightPrice.setText(price);
         holder.fromToDestinationName.setText("");
 
 
@@ -123,77 +124,77 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder().url(url).build();
 
-            try {
-                Response response = client.newCall(request).execute();
-
-                JSONArray flightData = new JSONArray(response.body().string());
-
-                for (int i = 0; i < flightData.length(); i++) {
-
-                    JSONObject flightDataObject = flightData.getJSONObject(i);
-                    Log.v("Print Leg Id: ",flightDataObject.getString("legId"));
-                }
-            }catch(IOException e) {
-
-                e.printStackTrace();
-            }catch(JSONException e){
-
-                System.out.println("no more content");
-            }
-
-//            try{
+//            try {
 //                Response response = client.newCall(request).execute();
 //
 //                JSONArray flightData = new JSONArray(response.body().string());
 //
-//                for(int i = 0; i<flightData.length();i++) {
+//                for (int i = 0; i < flightData.length(); i++) {
 //
 //                    JSONObject flightDataObject = flightData.getJSONObject(i);
-//
-//                    if (flightIdSet.contains(flightDataObject.getString("legId")))
-//                        continue;
-//
-//                    Flight flight = new Flight();
-//
-//                    flight.airlineName = flightDataObject.getString("airlineName");
-//                    flight.ID = flightDataObject.getInt("ID");
-//                    flight.departureTime = flightDataObject.getString("departureTime");
-//                    flight.arrivalTime = flightDataObject.getString("arrivalTime");
-//                    flight.price = flightDataObject.getDouble("price");
-//                    flight.distance = flightDataObject.getInt("distance");
-//                    flight.arrivalAirportCode = flightDataObject.getString("arrivalAirportCode");
-//                    flight.departureAirportCode = flightDataObject.getString("departureAirportCode");
-//                    flight.departureAirportLocation = flightDataObject.getString("departureAirportLocation");
-//                    flight.departureDate = flightDataObject.getString("departureDate");
-//                    flight.arrivalDate = flightDataObject.getString("arrivalDate");
-//                    flight.duration = flightDataObject.getString("duration");
-//                    flight.seatsRemaining = flightDataObject.getInt("seatsRemaining");
-//                    flight.legId = flightDataObject.getString("legId");
-//                    if (flightDataObject.getString("secondLeg")!= "" || flightDataObject.getString("secondLeg")!= "null") {
-//                        if (flightDataObject.getString("secondLeg").equals(flightData.getJSONObject(i+1).getString("legId"))) {
-//                            flight.secondLeg = createFlight(flightData.getJSONObject(i + 1));
-//                            Log.v("Print Leg: ",flight.legId + " is equal to "+flight.secondLeg.legId);
-//                            if(flightData.getJSONObject(i+1).getString("secondLeg") != "" || flightData.getJSONObject(i+1).getString("secondLeg") != "null") {
-//                                if(flightData.getJSONObject(i+1).getString("secondLeg").equals(flightData.getJSONObject(i+2).getString("legId"))) {
-//                                    flight.thirdLeg = createFlight(flightData.getJSONObject(i + 2));
-//                                    Log.v("Print Leg: ",flight.legId + " is equal to "+flight.thirdLeg.legId);
-//                                }
-//                            }
-//                        }
-//                    }
-//                    Log.v("Print Leg: ",flight.legId);
-//                    flightIdSet.add(flight.legId);
-//                    flights.add(flight);
-//
-//
-//                    }
-//                }catch(IOException e) {
+//                    Log.v("Print Leg Id: ",flightDataObject.getString("legId"));
+//                }
+//            }catch(IOException e) {
 //
 //                e.printStackTrace();
 //            }catch(JSONException e){
 //
 //                System.out.println("no more content");
 //            }
+
+            try{
+                Response response = client.newCall(request).execute();
+
+                JSONArray flightData = new JSONArray(response.body().string());
+
+                for(int i = 0; i<flightData.length();i++) {
+
+                    JSONObject flightDataObject = flightData.getJSONObject(i);
+
+                    if (flightIdSet.contains(flightDataObject.getString("legId")))
+                        continue;
+
+                    Flight flight = new Flight();
+
+                    flight.airlineName = flightDataObject.getString("airlineName");
+                    flight.ID = flightDataObject.getInt("ID");
+                    flight.departureTime = flightDataObject.getString("departureTime");
+                    flight.arrivalTime = flightDataObject.getString("arrivalTime");
+                    flight.price = flightDataObject.getDouble("price");
+                    flight.distance = flightDataObject.getInt("distance");
+                    flight.arrivalAirportCode = flightDataObject.getString("arrivalAirportCode");
+                    flight.departureAirportCode = flightDataObject.getString("departureAirportCode");
+                    flight.departureAirportLocation = flightDataObject.getString("departureAirportLocation");
+                    flight.departureDate = flightDataObject.getString("departureDate");
+                    flight.arrivalDate = flightDataObject.getString("arrivalDate");
+                    flight.duration = flightDataObject.getString("duration");
+                    flight.seatsRemaining = flightDataObject.getInt("seatsRemaining");
+                    flight.legId = flightDataObject.getString("legId");
+                    if (!flightDataObject.getString("secondLeg").equals("") || !flightDataObject.getString("secondLeg").equals("null")) {
+                        if (flightDataObject.getString("secondLeg").equals(flightData.getJSONObject(i+1).getString("legId"))) {
+                            flight.secondLeg = createFlight(flightData.getJSONObject(i + 1));
+                            Log.v("Print Leg",flight.legId + " is equal to "+flight.secondLeg.legId);
+                            if(!flightData.getJSONObject(i+1).getString("secondLeg").equals("") || !flightData.getJSONObject(i+1).getString("secondLeg").equals("null")) {
+                                if(flightData.getJSONObject(i+1).getString("secondLeg").equals(flightData.getJSONObject(i+2).getString("legId"))) {
+                                    flight.thirdLeg = createFlight(flightData.getJSONObject(i + 2));
+                                    Log.v("Print Leg ",flight.legId + " is equal to "+flight.thirdLeg.legId);
+                                }
+                            }
+                        }
+                    }
+                    Log.v("Print Leg",flight.legId);
+                    flightIdSet.add(flight.legId);
+                    flights.add(flight);
+
+
+                    }
+                }catch(IOException e) {
+
+                e.printStackTrace();
+            }catch(JSONException e){
+
+                System.out.println("no more content");
+            }
 
             return null;
 
