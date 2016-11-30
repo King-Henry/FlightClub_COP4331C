@@ -22,6 +22,7 @@ public class Hotel extends Reservation{
         this.reservationLocationCode = airportCode;
         this.reservationPrice = price;
         this.reservationDb = "Hotels";
+        this.reservationName = name;
         this.name = name;
         this.hotelId = hotelId;
         this.rating = rating;

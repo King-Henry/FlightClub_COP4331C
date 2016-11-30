@@ -5,7 +5,7 @@ package com.teamflightclub.flightclub;
  */
 
 public class Reservation {
-
+    String reservationName;
     double reservationPrice;
     String reservationId;
     String reservationLocationCode;
