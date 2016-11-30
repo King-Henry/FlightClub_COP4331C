@@ -41,6 +41,7 @@ public class CreateAccountAuthenticator extends AsyncTask<String,Void,String> {
             String last = params[1];
             String email = params[2];
             String password = params[3];
+
             URL url = new URL(login_url);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
@@ -103,6 +104,7 @@ public class CreateAccountAuthenticator extends AsyncTask<String,Void,String> {
             },1000);
         }
     }
+
 
     @Override
     protected void onProgressUpdate(Void... values) {
