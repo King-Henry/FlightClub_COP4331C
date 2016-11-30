@@ -67,7 +67,7 @@
             android:id = "@+id/flight_category_button"
             android:background="@drawable/boarders"
             android:text="@string/flights_category"
-            android:textSize="23sp" />
+            android:textSize="22sp" />
 
         <Button
             android:layout_width="300dp"
@@ -76,7 +76,7 @@
             android:id = "@+id/hotels_category_button"
             android:background="@drawable/boarders"
             android:text="@string/hotels_category"
-            android:textSize="23sp" />
+            android:textSize="22sp" />
 
         <Button
             android:layout_width="300dp"
@@ -85,7 +85,7 @@
             android:id = "@+id/cars_category_button"
             android:background="@drawable/boarders"
             android:text="@string/cars_category"
-            android:textSize="23sp"/>
+            android:textSize="22sp"/>
 
         <Button
             android:layout_width="300dp"
@@ -94,7 +94,7 @@
             android:id = "@+id/entertainment_category_button"
             android:background="@drawable/boarders"
             android:text="@string/entertainment_category"
-            android:textSize="23sp"/>
+            android:textSize="22sp"/>
 
     </LinearLayout>
 
