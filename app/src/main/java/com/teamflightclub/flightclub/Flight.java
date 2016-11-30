@@ -5,9 +5,10 @@ import org.json.JSONObject;
 
 /**
  * Created by Tim on 11/28/2016.
+ * Improved by Cary on 11/29/2016.
  */
 
-public class Flight {
+public class Flight extends Reservation{
 
     String airlineName;
     String flightNumber;
@@ -36,6 +37,10 @@ public class Flight {
     Flight (String airlineName, String flightNumber, String departureTime, String arrivalTime, double price, int ID, int distance,
             String arrivalAirportCode, String departureAirportCode, String departureAirportLocation, String arrivalAirportLocation,
             String departureDate, String arrivalDate, String duration, int seatsRemaining, String legId) {
+        this.reservationLocationCode = arrivalAirportCode;
+        this.reservationId = Integer.toString(ID);
+        this.reservationPrice = price;
+        this.reservationDb = "TempFlights2";
         this.airlineName = airlineName;
         this.flightNumber = flightNumber;
         this.departureTime = departureTime;
