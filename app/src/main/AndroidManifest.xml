@@ -29,6 +29,8 @@
         <activity android:name=".PrePaymentSystemActivity" />
         <activity android:name=".PaymentSystemActivity" />
         <activity android:name=".DisplayPursTicketInformation" />
+        <activity android:name=".FinalTicketActivity" />
+        <activity android:name=".ReadQRCodeActivity"></activity>
     </application>
 
 </manifest>

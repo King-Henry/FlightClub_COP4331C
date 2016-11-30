@@ -158,11 +158,9 @@
         android:text="Pay Ticket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:layout_marginTop="82dp"
+        android:id="@+id/pay"
         android:layout_below="@+id/form_with_zip"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3" />
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
