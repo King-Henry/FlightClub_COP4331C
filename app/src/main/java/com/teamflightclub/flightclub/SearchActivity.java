@@ -62,6 +62,8 @@ public class SearchActivity extends AppCompatActivity {
         searchButton = (Button)findViewById(R.id.search_button);
         numOfTickets = (EditText)findViewById(R.id.number_of_tickets);
 
+        Log.v("SearchActivity OnCreate", " OnCreate is running");
+
         numOfTicketsFormatter();
 
         String[] airports = getResources().getStringArray(R.array.airports_array);
@@ -112,6 +114,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     //do nothing
                 }
+                flights.clear();
                 shortToExtendedDateFormatter();
                 populateURLData();
                 loadingToResults();
@@ -120,8 +123,17 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.v("SearchActivity OnStart", " OnStart is running");
+    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.v("SearchActivity OnResume", " OnResume is running");
+    }
 
 
 
@@ -158,6 +170,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
         new SearchResultsAdapter.FetchtheFlights().execute();
+       // searchResultsAdapter.notifyDataSetChanged();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

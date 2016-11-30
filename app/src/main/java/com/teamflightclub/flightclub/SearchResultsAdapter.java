@@ -43,6 +43,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     public SearchResultsAdapter(ArrayList<Flight> flightData){
 
         flights = flightData;
+
+        Log.v("flights data empty?", "" + flights.isEmpty());
     }
 
 
@@ -50,6 +52,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     @Override
     public SearchListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
+        Log.v("OnCreateViewHolder", "ViewHolder being created");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_results_cardview_layout,parent,false);
         SearchListViewHolder searchListViewHolder = new SearchListViewHolder(view);
         return searchListViewHolder;
@@ -58,6 +61,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
     @Override
     public void onBindViewHolder(SearchListViewHolder holder, int position) {
+
+        Log.v("onBindViewHolder", " we are binding the viewholder");
 
         holder.airlineCompany.setText(flights.get(position).airlineName);
         holder.flightDepartureTime.setText(flights.get(position).departureTime);
@@ -105,7 +110,6 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         @Override
         protected Void doInBackground(Void... params) {
 
-            HttpURLConnection urlConnection = null;
             String url = "";
 
 
@@ -141,6 +145,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 //
 //                System.out.println("no more content");
 //            }
+
+            flightIdSet.clear();
 
             try{
                 Response response = client.newCall(request).execute();
@@ -203,6 +209,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         @Override
         protected void onPostExecute(Void aVoid) {
 
+            Log.v("OnPostExecute", " notifying data set changed");
             SearchActivity.searchResultsAdapter.notifyDataSetChanged();
         }
 
