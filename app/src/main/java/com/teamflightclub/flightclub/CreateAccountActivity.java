@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,7 +20,6 @@ public class CreateAccountActivity extends AppCompatActivity implements AsyncCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-        sendMail("1");
         first_input = (EditText)findViewById(R.id.firstName_createAccount);
         last_input = (EditText)findViewById(R.id.lastName_createAccount);
         email_input = (EditText)findViewById(R.id.emailAddress_createAccount);
@@ -85,8 +82,7 @@ public class CreateAccountActivity extends AppCompatActivity implements AsyncCal
         else {
             CreateAccountAuthenticator createAccountAuthenticator = new CreateAccountAuthenticator(this,this);
             createAccountAuthenticator.execute(firstName,lastName,email,password);
-         //
-         //   sendMail(email);
+            sendMail(email);
 
         }
     }
@@ -98,15 +94,15 @@ public class CreateAccountActivity extends AppCompatActivity implements AsyncCal
     public void sendMail(String toEmail){
         ArrayList<String> list = new ArrayList<>();
         String login = "TeamFlightClubHelp@gmail.com";
-        String login2 = "Cary.mcewan@gmail.com";
-        String myEmail = "admin@teamflightclub.com";
+       // String login2 = "Cary.mcewan@gmail.com";
+       // String login3 = 	"carymcewan@gator2007.hostgator.com";
+      //  String myEmail = "admin@teamflightclub.com";
         String myPass = "Cop.4331";
-        toEmail = "goris3111@gmail.com";
+     //   toEmail = "goris3111@gmail.com";
         list.add(toEmail);
         String toSubject = "Thank you for signing to FlightClub!";
 
-        String myText = "This is a test!";
-        Log.i("GMail", "toEmail: " + toEmail);
+        String myText = "Sign up for FlightClub";
         new SendMailTask(CreateAccountActivity.this).execute(login,
                 myPass, list, toSubject, myText);
     }
