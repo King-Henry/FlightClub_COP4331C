@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/clouds"
     tools:context="com.teamflightclub.flightclub.LoginActivity"
     >
 
@@ -24,7 +25,8 @@
             android:gravity="center_horizontal"
             android:textSize="50sp"
             android:textAllCaps="true"
-            android:text="@string/login_title"/>
+            android:text="@string/login_title"
+            android:textColor="@color/Black"/>
 
     </FrameLayout>
 
@@ -34,40 +36,54 @@
         android:layout_height="match_parent"
         android:orientation ="vertical"
         android:gravity="center_vertical"
-
-        >
+        android:weightSum="1">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:id = "@+id/email_text"
             android:hint="@string/email_address"
+            android:textStyle="bold"
             android:gravity="center_horizontal"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            style="@android:style/Widget.DeviceDefault.EditText" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:id = "@+id/password_text"
             android:hint="@string/password"
+            android:textStyle="bold"
             android:gravity="center_horizontal"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:selectAllOnFocus="true" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
             android:text="@string/sign_in"
+            android:textSize="17dp"
+            android:background="@drawable/boarders"
             android:shadowColor="@color/colorPrimary"
             android:id="@+id/login_button"
             />
 
         <TextView
-            android:paddingTop="20dp"
+            android:paddingTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
             android:gravity="center_horizontal"
             android:clickable="true"
             android:text = "@string/dont_have_acct"
-            android:id="@+id/create_acct"/>
+            android:textStyle="italic"
+            android:textColor="@color/Black"
+            android:id="@+id/create_acct"
+            android:layout_weight="0.05" />
 
     </LinearLayout>
 

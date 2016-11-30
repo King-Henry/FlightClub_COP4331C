@@ -4,56 +4,12 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background = "@drawable/beach1"
     tools:context="com.teamflightclub.flightclub.MainActivity"
     >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:orientation="horizontal"
-        >
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:id = "@+id/flight_category_button"
-            android:text="@string/flights_category"
-            />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:id = "@+id/hotels_category_button"
-            android:text="@string/hotels_category"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:orientation="horizontal"
-        android:paddingTop="85dp">
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:id = "@+id/cars_category_button"
-            android:text="@string/cars_category"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:id = "@+id/entertainment_category_button"
-            android:text="@string/entertainment_category"/>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,6 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="@string/my_cart"
+            android:textSize="16sp"
             android:gravity="center"
             android:id = "@+id/my_cart_bar_button"
             android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -76,6 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="@string/my_account"
+            android:textSize="16sp"
             android:gravity="center"
             android:id = "@+id/my_account_bar_button"
             android:layout_weight="1"
@@ -85,11 +43,58 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="@string/Setting"
+            android:textSize="16sp"
             android:gravity="center"
             android:id = "@+id/settings_bar_button"
             android:paddingLeft="4dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id = "@+id/flight_category_button"
+            android:background="@drawable/boarders"
+            android:text="@string/flights_category"
+            android:textSize="23sp" />
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id = "@+id/hotels_category_button"
+            android:background="@drawable/boarders"
+            android:text="@string/hotels_category"
+            android:textSize="23sp" />
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id = "@+id/cars_category_button"
+            android:background="@drawable/boarders"
+            android:text="@string/cars_category"
+            android:textSize="23sp"/>
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id = "@+id/entertainment_category_button"
+            android:background="@drawable/boarders"
+            android:text="@string/entertainment_category"
+            android:textSize="23sp"/>
 
     </LinearLayout>
 

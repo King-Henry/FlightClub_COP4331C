@@ -12,40 +12,6 @@
     tools:context="com.teamflightclub.flightclub.ControlPanelActivity">
 
 
-    <Button
-        android:text="Change password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
-        android:id="@+id/changePassword"
-        android:textAllCaps="false"
-        android:gravity="left|center_vertical"
-        android:layout_below="@+id/imageView2"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_toEndOf="@+id/imageView2" />
-
-    <Button
-        android:text="Change E-mail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/changeEmail"
-        android:textAllCaps="false"
-        android:gravity="left|center_vertical"
-        android:layout_below="@+id/changePassword"
-        android:layout_alignLeft="@+id/changePassword"
-        android:layout_alignStart="@+id/changePassword" />
-
-    <Button
-        android:text="View Recently Purchased Tickets"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/viewTicket"
-        android:textAllCaps="false"
-        android:gravity="left|center_vertical"
-        android:layout_below="@+id/changeEmail"
-        android:layout_alignLeft="@+id/changeEmail"
-        android:layout_alignStart="@+id/changeEmail" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,5 +19,46 @@
         android:id="@+id/imageView2"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/boarders"/>
+
+    <Button
+        android:text="Change password"
+        android:textAlignment="center"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/changePassword"
+        android:textAllCaps="false"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/boarders"/>
+
+    <Button
+        android:text="Change E-mail"
+        android:textAlignment="center"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/changeEmail"
+        android:textAllCaps="false"
+        android:gravity="center_vertical"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/changePassword"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/boarders"/>
+
+    <Button
+        android:text="View Recently Purchased Tickets"
+        android:textAlignment="center"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewTicket"
+        android:textAllCaps="false"
+        android:gravity="center_vertical"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/changeEmail"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/boarders"/>
+
 </RelativeLayout>
