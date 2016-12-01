@@ -55,8 +55,8 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
                 .build();
         try {
             Response response = okHttpClient.newCall(request).execute();
-            Log.v("AddTOCartCall", response.message());
-            return response.message();
+            Log.v("AddTOCartCall", response.body().string());
+            return response.body().string();
 
 
         }catch (IOException e){
@@ -70,7 +70,7 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
     @Override
     protected void onPostExecute(String response) {
 
-        if(response != null && response.equals("OK")){
+        if(response != null && response.equals("Successfully Added to Cart")){
 
             asyncCallback.done();
         }

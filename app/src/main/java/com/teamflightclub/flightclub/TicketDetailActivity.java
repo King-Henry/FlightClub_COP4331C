@@ -196,6 +196,6 @@ public class TicketDetailActivity extends AppCompatActivity implements AsyncCall
     @Override
     public void done() {
         
-        Toast.makeText(this,"Ticket Successfully purchased", Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Ticket successfully added to cart", Toast.LENGTH_LONG).show();
     }
 }

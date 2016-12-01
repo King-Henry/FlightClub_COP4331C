@@ -1,14 +1,12 @@
 package com.teamflightclub.flightclub;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -103,6 +101,7 @@ public class ChangeEmailActivity extends AppCompatActivity implements AsyncCallb
             changeEmailbutton.setEnabled(true);
         }
     }
+
 
     @Override
     public void done() {

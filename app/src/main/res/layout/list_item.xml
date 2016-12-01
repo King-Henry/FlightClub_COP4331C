@@ -6,6 +6,7 @@
     android:orientation="horizontal"
     android:paddingLeft="16dp"
     android:id="@+id/cont_item_root"
+    android:clickable="true"
 
     >
     <ImageView
