@@ -31,12 +31,6 @@
         <activity android:name=".PaymentSystemActivity" />
         <activity android:name=".DisplayPursTicketInformation" />
         <activity android:name=".FinalTicketActivity" />
-        <activity android:name=".ReadQRCodeActivity"></activity>
-        <activity android:name=".ui.ViewPursTicketsActivity" android:screenOrientation="portrait" />
-        <activity android:name=".ControlPanelActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".LoginActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ChangePasswordActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ChangeEmailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".SearchActivity" android:screenOrientation="portrait"></activity>
 
     </application>

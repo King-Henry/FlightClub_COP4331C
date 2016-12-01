@@ -20,6 +20,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -37,10 +38,13 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     static String passengers = "";
 
     public static ArrayList<Flight> flights;
+    public static HashSet<String> flightIdSet = new HashSet<String>();
 
     public SearchResultsAdapter(ArrayList<Flight> flightData){
 
         flights = flightData;
+
+        Log.v("flights data empty?", "" + flights.isEmpty());
     }
 
 
@@ -48,6 +52,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     @Override
     public SearchListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
+        Log.v("OnCreateViewHolder", "ViewHolder being created");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_results_cardview_layout,parent,false);
         SearchListViewHolder searchListViewHolder = new SearchListViewHolder(view);
         return searchListViewHolder;
@@ -57,10 +62,13 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     @Override
     public void onBindViewHolder(SearchListViewHolder holder, int position) {
 
+        Log.v("onBindViewHolder", " we are binding the viewholder");
+
         holder.airlineCompany.setText(flights.get(position).airlineName);
         holder.flightDepartureTime.setText(flights.get(position).departureTime);
         holder.flightArrivalTime.setText(flights.get(position).arrivalTime);
-        holder.flightPrice.setText("$" + Double.toString(flights.get(position).price));
+        String price = "$" + String.format("%.2f",flights.get(position).price);
+        holder.flightPrice.setText(price);
         holder.fromToDestinationName.setText("");
 
 
@@ -102,7 +110,6 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         @Override
         protected Void doInBackground(Void... params) {
 
-            HttpURLConnection urlConnection = null;
             String url = "";
 
 
@@ -121,6 +128,26 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder().url(url).build();
 
+//            try {
+//                Response response = client.newCall(request).execute();
+//
+//                JSONArray flightData = new JSONArray(response.body().string());
+//
+//                for (int i = 0; i < flightData.length(); i++) {
+//
+//                    JSONObject flightDataObject = flightData.getJSONObject(i);
+//                    Log.v("Print Leg Id: ",flightDataObject.getString("legId"));
+//                }
+//            }catch(IOException e) {
+//
+//                e.printStackTrace();
+//            }catch(JSONException e){
+//
+//                System.out.println("no more content");
+//            }
+
+            flightIdSet.clear();
+
             try{
                 Response response = client.newCall(request).execute();
 
@@ -130,6 +157,9 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
                     JSONObject flightDataObject = flightData.getJSONObject(i);
 
+                    if (flightIdSet.contains(flightDataObject.getString("legId")))
+                        continue;
+
                     Flight flight = new Flight();
 
                     flight.airlineName = flightDataObject.getString("airlineName");
@@ -137,7 +167,29 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
                     flight.departureTime = flightDataObject.getString("departureTime");
                     flight.arrivalTime = flightDataObject.getString("arrivalTime");
                     flight.price = flightDataObject.getDouble("price");
-
+                    flight.distance = flightDataObject.getInt("distance");
+                    flight.arrivalAirportCode = flightDataObject.getString("arrivalAirportCode");
+                    flight.departureAirportCode = flightDataObject.getString("departureAirportCode");
+                    flight.departureAirportLocation = flightDataObject.getString("departureAirportLocation");
+                    flight.departureDate = flightDataObject.getString("departureDate");
+                    flight.arrivalDate = flightDataObject.getString("arrivalDate");
+                    flight.duration = flightDataObject.getString("duration");
+                    flight.seatsRemaining = flightDataObject.getInt("seatsRemaining");
+                    flight.legId = flightDataObject.getString("legId");
+                    if (!flightDataObject.getString("secondLeg").equals("") || !flightDataObject.getString("secondLeg").equals("null")) {
+                        if (flightDataObject.getString("secondLeg").equals(flightData.getJSONObject(i+1).getString("legId"))) {
+                            flight.secondLeg = createFlight(flightData.getJSONObject(i + 1));
+                            Log.v("Print Leg",flight.legId + " is equal to "+flight.secondLeg.legId);
+                            if(!flightData.getJSONObject(i+1).getString("secondLeg").equals("") || !flightData.getJSONObject(i+1).getString("secondLeg").equals("null")) {
+                                if(flightData.getJSONObject(i+1).getString("secondLeg").equals(flightData.getJSONObject(i+2).getString("legId"))) {
+                                    flight.thirdLeg = createFlight(flightData.getJSONObject(i + 2));
+                                    Log.v("Print Leg ",flight.legId + " is equal to "+flight.thirdLeg.legId);
+                                }
+                            }
+                        }
+                    }
+                    Log.v("Print Leg",flight.legId);
+                    flightIdSet.add(flight.legId);
                     flights.add(flight);
 
 
@@ -157,7 +209,31 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         @Override
         protected void onPostExecute(Void aVoid) {
 
+            Log.v("OnPostExecute", " notifying data set changed");
             SearchActivity.searchResultsAdapter.notifyDataSetChanged();
+        }
+
+        public Flight createFlight(JSONObject flightDataObject) throws JSONException {
+            String airlineName = flightDataObject.getString("airlineName");
+            int ID = flightDataObject.getInt("ID");
+            String flightNumber = flightDataObject.getString("flightNumber");
+            String departureTime = flightDataObject.getString("departureTime");
+            String arrivalTime = flightDataObject.getString("arrivalTime");
+            double price = flightDataObject.getDouble("price");
+            int distance = flightDataObject.getInt("distance");
+            arrivalAirportCode = flightDataObject.getString("arrivalAirportCode");
+            departureAirportCode = flightDataObject.getString("departureAirportCode");
+            String departureAirportLocation = flightDataObject.getString("departureAirportLocation");
+            String arrivalAirportLocation = flightDataObject.getString("arrivalAirportLocation");
+            departureDate = flightDataObject.getString("departureDate");
+            String arrivalDate = flightDataObject.getString("arrivalDate");
+            String duration = flightDataObject.getString("duration");
+            int seatsRemaining = flightDataObject.getInt("seatsRemaining");
+            String legId = flightDataObject.getString("legId");
+
+            return new Flight(airlineName, flightNumber, departureTime, arrivalTime, price, ID, distance,
+            arrivalAirportCode, departureAirportCode, departureAirportLocation, arrivalAirportLocation,
+                    departureDate, arrivalDate, duration, seatsRemaining, legId);
         }
     }
 }

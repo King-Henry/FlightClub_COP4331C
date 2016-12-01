@@ -139,8 +139,8 @@ public class ControlPanelActivity extends AppCompatActivity {
         finish();
     }
     public void openQRCode(){
-       Intent intent = new Intent(this, ReadQRCodeActivity.class);
-        startActivity(intent);
+    //   Intent intent = new Intent(this, ReadQRCodeActivity.class);
+       // startActivity(intent);
       //  scanQR();
     }
     //product barcode mode
