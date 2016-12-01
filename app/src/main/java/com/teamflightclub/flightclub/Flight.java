@@ -34,9 +34,9 @@ public class Flight extends Reservation{
 
     }
 
-    Flight (String airlineName, String flightNumber, String departureTime, String arrivalTime, double price, int ID, int distance,
-            String arrivalAirportCode, String departureAirportCode, String departureAirportLocation, String arrivalAirportLocation,
-            String departureDate, String arrivalDate, String duration, int seatsRemaining, String legId) {
+    public Flight(String airlineName, String flightNumber, String departureTime, String arrivalTime, double price, int ID, int distance,
+                  String arrivalAirportCode, String departureAirportCode, String departureAirportLocation, String arrivalAirportLocation,
+                  String departureDate, String arrivalDate, String duration, int seatsRemaining, String legId) {
         this.reservationLocationCode = arrivalAirportCode;
         this.reservationId = Integer.toString(ID);
         this.reservationPrice = price;
