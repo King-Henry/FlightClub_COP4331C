@@ -138,11 +138,7 @@ public class ControlPanelActivity extends AppCompatActivity {
         Toast.makeText(this,"You have signed out",Toast.LENGTH_LONG).show();
         finish();
     }
-    public void openQRCode(){
-       Intent intent = new Intent(this, ReadQRCodeActivity.class);
-        startActivity(intent);
-      //  scanQR();
-    }
+
     //product barcode mode
     public void scanBar(View v) {
         try {

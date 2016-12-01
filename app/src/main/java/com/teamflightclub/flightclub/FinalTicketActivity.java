@@ -55,6 +55,7 @@ public class FinalTicketActivity extends AppCompatActivity {
         });
         t.start();
 
+        // Create a object of PdfDocument
     }
 
     private void getID() {
@@ -84,6 +85,7 @@ public class FinalTicketActivity extends AppCompatActivity {
         bitmap.setPixels(pixels, 0, 500, 0, 0, w, h);
         return bitmap;
     } /// end of this method
+
 
 
 }
