@@ -202,24 +202,27 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
                     if (flightIdSet.contains(flightDataObject.getString("legId")))
                         continue;
 
-                    Flight flight = new Flight();
+                    String airlineName = flightDataObject.getString("airlineName");
+                    int ID = flightDataObject.getInt("ID");
+                    String departureTime = flightDataObject.getString("departureTime");
+                    String arrivalTime = flightDataObject.getString("arrivalTime");
+                    double price = flightDataObject.getDouble("price");
+                    int distance = flightDataObject.getInt("distance");
+                    String arrivalAirportCode = flightDataObject.getString("arrivalAirportCode");
+                    String departureAirportCode = flightDataObject.getString("departureAirportCode");
+                    String departureAirportLocation = flightDataObject.getString("departureAirportLocation");
+                    String departureDate = flightDataObject.getString("departureDate");
+                    String arrivalDate = flightDataObject.getString("arrivalDate");
+                    String duration = flightDataObject.getString("duration");
+                    int seatsRemaining = flightDataObject.getInt("seatsRemaining");
+                    String legId = flightDataObject.getString("legId");
+                    String arrivalAirportLocation = flightDataObject.getString("arrivalAirportLocation");
+                    String flightNumber = flightDataObject.getString("ID");
 
-                    flight.airlineName = flightDataObject.getString("airlineName");
-                    flight.ID = flightDataObject.getInt("ID");
-                    flight.departureTime = flightDataObject.getString("departureTime");
-                    flight.arrivalTime = flightDataObject.getString("arrivalTime");
-                    flight.price = flightDataObject.getDouble("price");
-                    flight.distance = flightDataObject.getInt("distance");
-                    flight.arrivalAirportCode = flightDataObject.getString("arrivalAirportCode");
-                    flight.departureAirportCode = flightDataObject.getString("departureAirportCode");
-                    flight.departureAirportLocation = flightDataObject.getString("departureAirportLocation");
-                    flight.departureDate = flightDataObject.getString("departureDate");
-                    flight.arrivalDate = flightDataObject.getString("arrivalDate");
-                    flight.duration = flightDataObject.getString("duration");
-                    flight.seatsRemaining = flightDataObject.getInt("seatsRemaining");
-                    flight.legId = flightDataObject.getString("legId");
-                    flight.arrivalAirportLocation = flightDataObject.getString("arrivalAirportLocation");
-                    flight.flightNumber = flightDataObject.getString("ID");
+                    Flight flight = new Flight(airlineName,flightNumber,departureTime,arrivalTime,price,ID,distance,
+                            arrivalAirportCode,departureAirportCode,departureAirportLocation,arrivalAirportLocation,
+                            departureDate,arrivalDate,duration,seatsRemaining,legId);
+
                     if (!flightDataObject.getString("secondLeg").equals("") || !flightDataObject.getString("secondLeg").equals("null")) {
                         if (flightDataObject.getString("secondLeg").equals(flightData.getJSONObject(i+1).getString("legId"))) {
                             flight.secondLeg = createFlight(flightData.getJSONObject(i + 1));

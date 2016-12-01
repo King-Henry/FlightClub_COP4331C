@@ -17,9 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static android.view.View.GONE;
 import static com.teamflightclub.flightclub.SearchResultsAdapter.flights;
 
-public class TicketDetailActivity extends AppCompatActivity {
+public class TicketDetailActivity extends AppCompatActivity implements AsyncCallback{
+
+    Flight flight;
+    Flight flightTwo;
+    Flight flightThree;
 
     CardView leg_one_view;
     CardView leg_two_view;
@@ -94,9 +99,9 @@ public class TicketDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ticket_detail);
 
         Bundle bundle = getIntent().getExtras();
-        Flight flight = flights.get(bundle.getInt("FlightItemPosition"));
+        flight = flights.get(bundle.getInt("FlightItemPosition"));
         //Toast.makeText(this, flight.arrivalTime + flight.departureAirportLocation + flight.arrivalAirportLocation, Toast.LENGTH_LONG).show();
-
+        Log.v("Checking data", flight.reservationName + " "+  flight.reservationId + " " + flight.reservationDb + " " + flight.reservationLocationCode + " " + flight.reservationPrice);
         add_to_cart_button = (Button)findViewById(R.id.add_to_cart_button);
         sign_in_text = (TextView)findViewById(R.id.sign_in_text);
 
@@ -104,6 +109,7 @@ public class TicketDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                new AddToCartCall(flight,TicketDetailActivity.this,TicketDetailActivity.this).execute();
             }
         });
 
@@ -123,33 +129,28 @@ public class TicketDetailActivity extends AppCompatActivity {
 
         if(flight.secondLeg != null){
 
-            Flight flightTwo = flight.secondLeg;
+            flightTwo = flight.secondLeg;
             leg_two_view = (CardView)findViewById(R.id.leg_two_detail_cardview);
             leg_two_view.setVisibility(View.VISIBLE);
             flight_name_and_number_leg_two = (TextView)findViewById(R.id.leg_two_airline_name_and_flight_number);
             departure_time_leg_two = (TextView)findViewById(R.id.leg_two_departure_city_and_time);
             from_to_city_leg_two = (TextView)findViewById(R.id.leg_two_flight_duration_and_distance);
             price_leg_two = (TextView)findViewById(R.id.leg_two_trip_price_red);
+            price_leg_two.setVisibility(GONE);
             arrival_time_leg_two = (TextView)findViewById(R.id.leg_two_arrival_city_and_time);
 
-            leg_two_view = (CardView)findViewById(R.id.leg_two_detail_cardview);
-            flight_name_and_number_leg_two = (TextView)findViewById(R.id.leg_two_airline_name_and_flight_number);
-            departure_time_leg_two = (TextView)findViewById(R.id.leg_two_departure_city_and_time);
-            from_to_city_leg_two = (TextView)findViewById(R.id.leg_two_flight_duration_and_distance);
-            price_leg_two = (TextView)findViewById(R.id.leg_two_trip_price_red);
-            arrival_time_leg_two = (TextView)findViewById(R.id.leg_two_arrival_city_and_time);
 
             flight_name_and_number_leg_two.setText(flightTwo.airlineName + " " + flightTwo.flightNumber);
             departure_time_leg_two.setText(flightTwo.departureAirportLocation + "\n" + flightTwo.departureTime + "\n" + flightTwo.departureDate);
             from_to_city_leg_two.setText(flightTwo.duration + " ," + flightTwo.distance + "miles");
-            price_leg_two.setText("$" + flightTwo.price);
+            //price_leg_two.setText("$" + flightTwo.price);
             arrival_time_leg_two.setText(flightTwo.arrivalAirportLocation + "\n" + flightTwo.arrivalTime + "\n" + flightTwo.arrivalDate);
 
         }
 
         if(flight.thirdLeg != null){
 
-            Flight flightThree = flight.thirdLeg;
+            flightThree = flight.thirdLeg;
 
             leg_three_view = (CardView)findViewById(R.id.leg_three_detail_cardview);
             leg_three_view.setVisibility(View.VISIBLE);
@@ -157,19 +158,14 @@ public class TicketDetailActivity extends AppCompatActivity {
             departure_time_leg_three = (TextView)findViewById(R.id.leg_three_departure_city_and_time);
             from_to_city_leg_three = (TextView)findViewById(R.id.leg_three_flight_duration_and_distance);
             price_leg_three = (TextView)findViewById(R.id.leg_three_trip_price_red);
+            price_leg_three.setVisibility(GONE);
             arrival_time_leg_three = (TextView)findViewById(R.id.leg_three_arrival_city_and_time);
 
-            leg_three_view = (CardView)findViewById(R.id.leg_three_detail_cardview);
-            flight_name_and_number_leg_three = (TextView)findViewById(R.id.leg_three_airline_name_and_flight_number);
-            departure_time_leg_three = (TextView)findViewById(R.id.leg_three_departure_city_and_time);
-            from_to_city_leg_three = (TextView)findViewById(R.id.leg_three_flight_duration_and_distance);
-            price_leg_three = (TextView)findViewById(R.id.leg_three_trip_price_red);
-            arrival_time_leg_three = (TextView)findViewById(R.id.leg_three_arrival_city_and_time);
 
             flight_name_and_number_leg_three.setText(flightThree.airlineName + " " + flightThree.flightNumber);
             departure_time_leg_three.setText(flightThree.departureAirportLocation + "\n" + flightThree.departureTime + "\n" + flightThree.departureDate);
             from_to_city_leg_three.setText(flightThree.duration + " ," + flightThree.distance + "miles");
-            price_leg_three.setText("$" + flightThree.price);
+            //price_leg_three.setText("$" + flightThree.price);
             arrival_time_leg_three.setText(flightThree.arrivalAirportLocation + "\n" + flightThree.arrivalTime + "\n" + flightThree.arrivalDate);
         }
 
@@ -192,8 +188,14 @@ public class TicketDetailActivity extends AppCompatActivity {
             hideSignInButton = true;
             invalidateOptionsMenu();
             add_to_cart_button.setEnabled(true);
-            sign_in_text.setVisibility(View.GONE);
+            sign_in_text.setVisibility(GONE);
 
         }
+    }
+
+    @Override
+    public void done() {
+        
+        Toast.makeText(this,"Ticket Successfully purchased", Toast.LENGTH_LONG).show();
     }
 }
