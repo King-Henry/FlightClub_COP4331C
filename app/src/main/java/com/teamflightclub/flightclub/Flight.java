@@ -43,7 +43,7 @@ public class Flight extends Reservation{
         this.reservationDb = "TempFlights2";
         this.airlineName = airlineName;
         this.flightNumber = flightNumber;
-        this.reservationName = flightNumber;
+        this.reservationName = airlineName + " "+flightNumber;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.price = price;

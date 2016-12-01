@@ -17,6 +17,6 @@ public class Reservation extends ListItem{
 
     public void setListInfo(int imageResId) {
         setImageResId(imageResId);
-        setTitle(this.reservationName);
+        setTitle(this.reservationName + " - $" +String.format("%.2f",this.reservationPrice));
     }
 }
