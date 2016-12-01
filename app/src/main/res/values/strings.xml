@@ -31,6 +31,10 @@
     <string name="current_email">Current Email</string>
     <string name="new_email">New Email</string>
     <string name="sign_out">Sign Out</string>
+    <string-array name="airports_array">
+        <item>MCO(Orlando Int\'l Airport)</item>
+        <item>JFK(John F. Kennedy Int\'l)</item>
+    </string-array>
     <string name="name">Name</string>
     <string name="button">Button</string>
     <string name="CreditCardNumberHelp" />
@@ -39,3 +43,5 @@
     <string name="ZipHelp">Zip code of billing address</string>
     <string name="insert_package_information_here">Insert package information here</string>
 </resources>
+
+
