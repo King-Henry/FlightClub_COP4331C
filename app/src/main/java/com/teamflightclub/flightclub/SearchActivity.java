@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class SearchActivity extends AppCompatActivity {
 
     ArrayList<Flight> flights;
 
-
+    static DateSetter dateSetter;
 
     public static int editTextIdentifier = 0;
     public static int numberOfTimesCalled = 0;
@@ -55,19 +56,19 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        airportDeparture = (AutoCompleteTextView)findViewById(R.id.departure_airport_input);
-        airportArrival = (AutoCompleteTextView)findViewById(R.id.arrival_airport_input);
-        returnDate = (EditText)findViewById(R.id.flight_return_date);
-        departureDate = (EditText)findViewById(R.id.flight_departure_date);
-        searchButton = (Button)findViewById(R.id.search_button);
-        numOfTickets = (EditText)findViewById(R.id.number_of_tickets);
+        airportDeparture = (AutoCompleteTextView) findViewById(R.id.departure_airport_input);
+        airportArrival = (AutoCompleteTextView) findViewById(R.id.arrival_airport_input);
+        returnDate = (EditText) findViewById(R.id.flight_return_date);
+        departureDate = (EditText) findViewById(R.id.flight_departure_date);
+        searchButton = (Button) findViewById(R.id.search_button);
+        numOfTickets = (EditText) findViewById(R.id.number_of_tickets);
 
         Log.v("SearchActivity OnCreate", " OnCreate is running");
 
         numOfTicketsFormatter();
 
         String[] airports = getResources().getStringArray(R.array.airports_array);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,airports);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, airports);
         airportDeparture.setAdapter(adapter);
         airportArrival.setAdapter(adapter);
 
@@ -77,7 +78,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 numberOfTimesCalled = 0;
                 android.support.v4.app.DialogFragment dialogFragment = new DatePickerFragment();
-                dialogFragment.show(getSupportFragmentManager(),"datePicker");
+                dialogFragment.show(getSupportFragmentManager(), "datePicker");
 
             }
         });
@@ -88,18 +89,24 @@ public class SearchActivity extends AppCompatActivity {
                 numberOfTimesCalled = 0;
                 editTextIdentifier = 1;
                 android.support.v4.app.DialogFragment dialogFragment = new DatePickerFragment();
-                dialogFragment.show(getSupportFragmentManager(),"datePicker");
+                dialogFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
 
         flights = new ArrayList<Flight>();
 
-        searchResults = (RecyclerView)findViewById(R.id.search_results_recycler_view);
+        searchResults = (RecyclerView) findViewById(R.id.search_results_recycler_view);
         searchResults.setVisibility(View.INVISIBLE);
         searchResults.setLayoutManager(new LinearLayoutManager(this));
         searchResults.setHasFixedSize(true);
-        searchResultsAdapter = new SearchResultsAdapter(flights);
+        searchResultsAdapter = new SearchResultsAdapter(flights, this, new FlightSearchOnClickListener() {
+            @Override
+            public void onItemClick(Flight flight) {
+                Toast.makeText(SearchActivity.this, "WE'RE IN BIDNESSS", Toast.LENGTH_LONG).show();
+            }
+        });
         searchResults.setAdapter(searchResultsAdapter);
+
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,10 +114,10 @@ public class SearchActivity extends AppCompatActivity {
 
                 Log.v("Search Button", "has been clicked");
                 try {
-                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                     Log.v("close keyboard", "closing keyboard??");
-                }catch(Exception e){
+                } catch (Exception e) {
 
                     //do nothing
                 }
@@ -120,8 +127,10 @@ public class SearchActivity extends AppCompatActivity {
                 loadingToResults();
             }
         });
-
     }
+
+
+
 
     @Override
     protected void onStart() {
@@ -224,7 +233,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
     public static class DatePickerFragment extends android.support.v4.app.DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
+            implements DatePickerDialog.OnDateSetListener  {
 
 
             public Dialog onCreateDialog(Bundle savedInstanceState){
