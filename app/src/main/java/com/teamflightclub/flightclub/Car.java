@@ -30,6 +30,7 @@ public class Car extends Reservation{
         this.supplierName = supplierName;
         this.adultCount = adultCount;
         this.carMakeModel = carMakeModel;
+        this.reservationName = carMakeModel;
         this.ratePeriodCode = ratePeriodCode;
         this.unitPrice = unitPrice;
         this.totalPrice = totalPrice;
