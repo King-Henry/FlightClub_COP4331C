@@ -1,6 +1,8 @@
 package com.teamflightclub.flightclub;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.CardView;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +19,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,16 +38,24 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     static String departureDate = "";
     static String passengers = "";
 
+    public int position;
+
     public static ArrayList<Flight> flights;
     public static HashSet<String> flightIdSet = new HashSet<String>();
 
-    public SearchResultsAdapter(ArrayList<Flight> flightData){
+    private final FlightSearchOnClickListener flightSearchOnClickListener;
+
+    static Context contxt;
+
+    public SearchResultsAdapter(ArrayList<Flight> flightData, Context context,
+                                FlightSearchOnClickListener flightSearchOnClickListener){
 
         flights = flightData;
+        contxt = context;
+        this.flightSearchOnClickListener = flightSearchOnClickListener;
 
         Log.v("flights data empty?", "" + flights.isEmpty());
     }
-
 
 
     @Override
@@ -64,23 +73,26 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
         Log.v("onBindViewHolder", " we are binding the viewholder");
 
-        holder.airlineCompany.setText(flights.get(position).airlineName);
-        holder.flightDepartureTime.setText(flights.get(position).departureTime);
-        holder.flightArrivalTime.setText(flights.get(position).arrivalTime);
-        String price = "$" + String.format("%.2f",flights.get(position).price);
-        holder.flightPrice.setText(price);
-        holder.fromToDestinationName.setText("");
+//        holder.airlineCompany.setText(flights.get(position).airlineName);
+//        holder.flightDepartureTime.setText(flights.get(position).departureTime);
+//        holder.flightArrivalTime.setText(flights.get(position).arrivalTime);
+//        String price = "$" + String.format("%.2f",flights.get(position).price);
+//        holder.flightPrice.setText(price);
+//        holder.fromToDestinationName.setText("");
+        this.position = position;
 
-
+        holder.bind(flights.get(position), flightSearchOnClickListener,position);
 
         //bind views with information
     }
+
 
     @Override
     public int getItemCount() {
 
         return flights == null ? 0: flights.size();
     }
+
 
     public static class SearchListViewHolder extends RecyclerView.ViewHolder{
 
@@ -100,6 +112,36 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             flightArrivalTime = (TextView)viewHolderLayout.findViewById(R.id.arrival_time);
             flightPrice = (TextView)viewHolderLayout.findViewById(R.id.trip_price);
             fromToDestinationName = (TextView)viewHolderLayout.findViewById(R.id.departure_arrival_names);
+        }
+
+        public void bind(final Flight flight,final FlightSearchOnClickListener onClickListener, int position){
+
+            airlineCompany.setText(flight.airlineName);
+            flightDepartureTime.setText(flight.departureTime);
+            flightArrivalTime.setText(flight.arrivalTime);
+            String price = "$" + String.format("%.2f",flight.price);
+            flightPrice.setText(price);
+
+            if(flight.secondLeg != null) {
+
+                fromToDestinationName.setText("This is a Multi-City Flight");
+            }
+
+            else{
+
+                fromToDestinationName.setText("");
+            }
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent detailScreen = new Intent(contxt, TicketDetailActivity.class);
+                    detailScreen.putExtra("FlightItemPosition",getAdapterPosition());
+                    Log.v("Item Position", "" + getAdapterPosition());
+                    contxt.startActivity(detailScreen);
+                }
+            });
         }
     }
 
@@ -176,6 +218,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
                     flight.duration = flightDataObject.getString("duration");
                     flight.seatsRemaining = flightDataObject.getInt("seatsRemaining");
                     flight.legId = flightDataObject.getString("legId");
+                    flight.arrivalAirportLocation = flightDataObject.getString("arrivalAirportLocation");
+                    flight.flightNumber = flightDataObject.getString("ID");
                     if (!flightDataObject.getString("secondLeg").equals("") || !flightDataObject.getString("secondLeg").equals("null")) {
                         if (flightDataObject.getString("secondLeg").equals(flightData.getJSONObject(i+1).getString("legId"))) {
                             flight.secondLeg = createFlight(flightData.getJSONObject(i + 1));
@@ -236,4 +280,5 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
                     departureDate, arrivalDate, duration, seatsRemaining, legId);
         }
     }
+
 }
