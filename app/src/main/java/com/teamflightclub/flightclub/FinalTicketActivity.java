@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class FinalTicketActivity extends AppCompatActivity {
     TextView ticketNumber;
     Bitmap bitmap2;
     Bitmap bitmap3;
+    Bitmap screen;
     Button savePDF;
     public final static int WIDTH = 500;
 
@@ -60,14 +62,20 @@ public class FinalTicketActivity extends AppCompatActivity {
         writeText();
         createQR();
         //getIMG();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onWindowFocusChanged();
         savePDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+              //  savePDF.setVisibility(View.GONE);
                 getIMG();
             }
         });
-
     }
 
     public void createQR(){
@@ -77,7 +85,7 @@ public class FinalTicketActivity extends AppCompatActivity {
                 QRcode = "This is My first QR code";
                 try {
                     synchronized (this) {
-                        wait(100);
+                        wait(2000);
 // runOnUiThread method used to do UI task in main thread.
                         runOnUiThread(new Runnable() {
                             @Override
@@ -174,8 +182,31 @@ public class FinalTicketActivity extends AppCompatActivity {
         return bitmap;
     } /// end of this method
 
+
+    public void onWindowFocusChanged(){
+        int view = R.id.final_layout_external;
+        final ViewGroup v = (ViewGroup) ((ViewGroup) this
+                .findViewById(view)).getChildAt(0).getRootView();
+      //  Bitmap screen;
+        //   View v = mRootView;
+        ViewGroup v2 = v;
+        v2.setDrawingCacheEnabled(true);
+        Button lay = (Button)v2.findViewById(R.id.final_save);
+       // lay.setVisibility(View.GONE);
+       // savePDF.setVisibility(View.GONE);
+// this is the important code :)
+// Without it the view will have a dimension of 0,0 and the bitmap will be null
+        v2.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        v2.layout(0, 0, v2.getMeasuredWidth(), v2.getMeasuredHeight());
+
+        v2.buildDrawingCache(true);
+        screen = Bitmap.createBitmap(v2.getDrawingCache(true));
+        v2.setDrawingCacheEnabled(false);
+
+    }
     void getIMG() {
-        View mRootView = findViewById(R.id.last_layout);
+      //  View mRootView = findViewById(R.id.last_layout);
         verifyStoragePermissions(this);
         //Assuming your rootView is called mRootView like so
 
@@ -183,31 +214,31 @@ public class FinalTicketActivity extends AppCompatActivity {
         String state = Environment.getExternalStorageState();
 
 //Then take the screen shot
-   //     final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
-      //          .findViewById(R.id.final_layout)).getChildAt(0).getRootView();
-        Bitmap screen;
-        View v = mRootView;
-        v.setDrawingCacheEnabled(true);
+       // final ViewGroup v = (ViewGroup) ((ViewGroup) this
+      //          .findViewById(R.id.last_layout)).getChildAt(0).getRootView();
+    //    Bitmap screen;
+     //   View v = mRootView;
+       // v.setDrawingCacheEnabled(true);
 
 // this is the important code :)
 // Without it the view will have a dimension of 0,0 and the bitmap will be null
-        v.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
+       // v.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+        //        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        //v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
 
-        v.buildDrawingCache(true);
-        screen = Bitmap.createBitmap(v.getDrawingCache(true));
-        v.setDrawingCacheEnabled(false);
+       // v.buildDrawingCache(true);
+      //  screen = Bitmap.createBitmap(v.getDrawingCache(true));
+     //   v.setDrawingCacheEnabled(false);
 
 
 //Now create the name of your PDF file that you will generate
         //  pdfFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"myPdfFile.pdf");
-        pdfFile = new File(Environment.getExternalStorageDirectory() + "/Download", "myPdfFile25.pdf");
+        pdfFile = new File(Environment.getExternalStorageDirectory() + "/Download", "myPdfFile31.pdf");
 
-        convertPDF(screen);
+        convertPDF();
     }
 
-    public void convertPDF(Bitmap screen) {
+    public void convertPDF() {
         try {
             Document document = new Document();
 
@@ -219,9 +250,9 @@ public class FinalTicketActivity extends AppCompatActivity {
             addImage(document, byteArray);
 
 
-            Bitmap bmap = encodeAsBitmap(QRcode);
+           // Bitmap bmap = encodeAsBitmap(QRcode);
             ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
-            bmap.compress(Bitmap.CompressFormat.PNG,100,stream2);
+            bitmap2.compress(Bitmap.CompressFormat.PNG,100,stream2);
             byte[] byteArray2 = stream2.toByteArray();
             addImage(document,byteArray2);
 

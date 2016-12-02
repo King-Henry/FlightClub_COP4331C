@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/final_layout_external"
-    tools:context="com.teamflightclub.flightclub.FinalTicketActivity">
-
+    tools:context="com.teamflightclub.flightclub.FinalTicketActivity"
+    android:weightSum="1">
 
 
     <RelativeLayout
         android:id="@+id/last_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -21,99 +21,98 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"
             android:gravity="center_horizontal"
             android:text="Ticket Confirmation"
             android:textAllCaps="false"
-            android:textSize="40sp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/final_information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/final_confirm"
+            android:layout_below="@+id/final_confirm"
             android:paddingLeft="10dp"
             android:text="Ticket Information"
-            android:textSize="20sp"
-            android:layout_below="@+id/final_confirm"
-            android:layout_alignStart="@+id/final_confirm" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/final_name"
-            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_alignStart="@+id/final_information"
             android:layout_below="@+id/final_information"
-            android:layout_alignStart="@+id/final_information" />
+            android:paddingLeft="10dp"
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/final_price"
-            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_alignStart="@+id/final_name"
             android:layout_below="@+id/final_name"
-            android:layout_alignStart="@+id/final_name" />
+            android:paddingLeft="10dp"
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/final_ticketnumber"
-            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_alignStart="@+id/final_price"
             android:layout_below="@+id/final_price"
-            android:layout_alignStart="@+id/final_price" />
+            android:paddingLeft="10dp"
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/final_address"
-            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_alignStart="@+id/final_ticketnumber"
             android:layout_below="@+id/final_ticketnumber"
-            android:layout_alignStart="@+id/final_ticketnumber" />
+            android:paddingLeft="10dp"
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/final_creditcard"
-            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/final_address"
             android:layout_below="@+id/final_address"
             android:layout_marginTop="14dp"
+            android:paddingLeft="10dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/final_divide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="---------------------------------------------------------------"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/final_creditcard"
+            android:layout_marginTop="10dp"
             android:paddingLeft="50dp"
             android:paddingRight="10dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp" />
+            android:text="---------------------------------------------------------------" />
 
         <ImageView
+            android:id="@+id/img_qr_code_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/img_qr_code_image"
-            android:layout_gravity="center_horizontal"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/final_divide"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
+            android:layout_gravity="center_horizontal" />
 
         <Button
             android:id="@+id/final_save"
             android:layout_width="wrap_content"
             android:layout_height="68dp"
-            android:text="Save as PDF"
-            android:textAllCaps="false"
             android:layout_alignBaseline="@+id/final_name"
             android:layout_alignBottom="@+id/final_name"
-            android:layout_alignEnd="@+id/final_divide" />
+            android:layout_alignEnd="@+id/final_divide"
+            android:text="Save as PDF"
+            android:textAllCaps="false" />
 
 
     </RelativeLayout>
