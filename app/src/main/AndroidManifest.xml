@@ -63,6 +63,9 @@
             android:name=".HotelSearchActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".HotelDetailScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".DisplayPursTicketInformation"
             android:screenOrientation="portrait" />
         <activity

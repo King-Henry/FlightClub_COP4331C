@@ -99,6 +99,13 @@ public class HotelDetailScreenActivity extends AppCompatActivity implements Asyn
         amenities = (TextView)findViewById(R.id.car_class_name_detail);
         hotelSignInText = (TextView)findViewById(R.id.car_sign_in_text);
         hotelAddToCart = (Button)findViewById(R.id.car_add_to_cart_button);
+        hotelAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                addToCart();
+            }
+        });
 
         Glide.with(this).load(hotel.thumbnailUrl).into(hotelPicture);
         name.setText(hotel.name);
@@ -145,5 +152,9 @@ public class HotelDetailScreenActivity extends AppCompatActivity implements Asyn
         }
 
         return formattedAmenities.substring(0,formattedAmenities.length()-3);
+    }
+
+    public void addToCart() {
+        new HotelAddToCartCall(hotel,HotelDetailScreenActivity.this,HotelDetailScreenActivity.this).execute();
     }
 }
