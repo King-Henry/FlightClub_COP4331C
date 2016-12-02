@@ -27,7 +27,7 @@
 
         <activity
             android:name=".ViewPurchasedTickets"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.ViewPursTicketsActivity"
@@ -60,6 +60,9 @@
             android:name=".PaymentSystemActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".HotelSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".DisplayPursTicketInformation"
             android:screenOrientation="portrait" />
         <activity
@@ -68,9 +71,10 @@
 
         <activity
             android:name=".CarSearchActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".CarDetailScreenActivity"
+        <activity
+            android:name=".CarDetailScreenActivity"
             android:screenOrientation="portrait">
 
         </activity>
