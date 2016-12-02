@@ -2,6 +2,7 @@ package com.teamflightclub.flightclub;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
+                .addFormDataPart("userId", PreferenceManager.getDefaultSharedPreferences(context).getString(("userRowID"), ""))
                 .addFormDataPart("reservationName", flight.reservationName)
                 .addFormDataPart("reservationId", flight.reservationId)
                 .addFormDataPart("reservationPrice", Double.toString(flight.reservationPrice))
@@ -56,7 +58,7 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
         try {
             Response response = okHttpClient.newCall(request).execute();
             Log.v("AddTOCartCall", response.body().string());
-            return response.body().string();
+            return (response.body().string());
 
 
         }catch (IOException e){
@@ -70,8 +72,10 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
     @Override
     protected void onPostExecute(String response) {
 
-        if(response != null && response.equals("Successfully Added to Cart")){
+        Log.v("PostExecuteResponse",response);
 
+        if(!response.equals("") && !response.equals(null) && response.equals("Successfully Added to Cart")){
+            Log.v("asyncCallback","Point Reached");
             asyncCallback.done();
         }
 
