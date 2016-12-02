@@ -1,6 +1,7 @@
 package com.teamflightclub.flightclub;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -76,6 +77,14 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
 
         final CreditCardForm zipForm = (CreditCardForm) findViewById(R.id.form_with_zip);
         zipForm.setOnCardValidCallback(cardValidCallback);
+        payment = (Button)findViewById(R.id.pay);
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                goTopayment();
+            }
+        });
 
     }
     @Override
@@ -158,4 +167,9 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
         list.add(array[i]);
         return list;
     }
+    public void goTopayment(){
+        Intent i = new Intent(this, FinalTicketActivity.class);
+        startActivity(i);
+    }
+
 }

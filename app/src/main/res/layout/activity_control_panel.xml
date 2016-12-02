@@ -60,4 +60,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewQR"
+        android:textAllCaps="false"
+
+
+        android:text="Read QR code"
+        android:layout_below="@+id/viewTicket"
+        android:layout_alignLeft="@+id/viewTicket"
+        android:layout_alignStart="@+id/viewTicket" />
+
 </RelativeLayout>

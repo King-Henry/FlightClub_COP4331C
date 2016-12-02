@@ -31,9 +31,28 @@
     <string name="current_email">Current Email</string>
     <string name="new_email">New Email</string>
     <string name="sign_out">Sign Out</string>
+
+    <string-array name="airports_array">
+        <item>MCO (Orlando Int\'l Airport)</item>
+        <item>JFK (John F. Kennedy Int\'l)</item>
+        <item>ATL (Atlanta Int\'l Airport)</item>
+        <item>LAX (Los Angeles Int\'l Airport)</item>
+        <item>ORD (O\'Hare Int\'l Airport)</item>
+        <item>DFW (Dallas/Fort Worth Int\'l Airport)</item>
+        <item>DEN (Denver Int\'l Airport)</item>
+        <item>SFO (San Francisco Int\'l Airport)</item>
+        <item>CLT (Charlotte Douglas Int\'l Airport)</item>
+        <item>LAS (McCarran Int\'l Airport)</item>
+        <item>PHX (Phoenix Sky Harbor Int\'l Airport)</item>
+        <item>MIA (Miami Int\'l Airport)</item>
+        <item>IAH (George Bush Int\'l Airport)</item>
+        <item>SEA (Seattle-Tacoma Int\'l Airport)</item>
+        <item>EWR (Newark Liberty Int\'l Airport)</item>
+    </string-array>
+
     <string name="name">Name</string>
     <string name="button">Button</string>
-    <string name="CreditCardNumberHelp" />
+    <string name="CreditCardNumberHelp"></string>
     <string name="ExpirationDateHelp">Expiration Date (MM/YY)</string>
     <string name="SecurityCodeHelp">Security Code (CVV)</string>
     <string name="ZipHelp">Zip Code Of Billing Address</string>

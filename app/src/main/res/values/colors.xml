@@ -50,4 +50,6 @@
     <color name="Wheat">#F5DEB3</color>
     <color name="SandyBrown">#F4A460</color>
     <color name="Azure">#F0FFFF</color>
+    <color name="black2">#000000</color>
+    <color name="white2">#ffffff</color>
 </resources>
