@@ -214,7 +214,7 @@ public class PrePaymentSystemAdapter extends RecyclerView.Adapter<PrePaymentSyst
                             break;
 
                         case "Hotel":
-                            String hotelName = dataObject.getString("Name");
+                            String hotelName = "Hotel Reservation";
                             int hotelId = dataObject.getInt("hotelId");
                             double rating = dataObject.getDouble("Rating");
                             String hotelAirportCode = dataObject.getString("airportCode");

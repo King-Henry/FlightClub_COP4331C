@@ -61,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        hotelsCategory.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+
+              Intent goToHotelSearch = new Intent(MainActivity.this, HotelSearchActivity.class);
+              startActivity(goToHotelSearch);
+          }
+      }
+
+        );
+
         flightsCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
