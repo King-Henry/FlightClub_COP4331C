@@ -197,6 +197,7 @@ public class MyCartActivity extends AppCompatActivity implements AdapterRecPayme
                         switch (dataObject.getString("Type")) {
 
                             case "Flight":
+                                Log.v("Flight ID",dataObject.getString("ID"));
                                 String airlineName = dataObject.getString("airlineName");
                                 int ID = dataObject.getInt("ID");
                                 String flightNumber = dataObject.getString("flightNumber");
