@@ -26,7 +26,7 @@ public static List<ListItem > getListData()
         }
         return data;
     }
-/* Get data for the MyCart Activity */
+    /* Get data for the MyCart Activity */
     public static List<ListItem> getListData2() {
         List<ListItem > data = new ArrayList<>();
         for (int i=0; i<3; i++) {

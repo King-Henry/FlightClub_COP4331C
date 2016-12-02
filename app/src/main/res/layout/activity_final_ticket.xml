@@ -1,18 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:fitsSystemWindows="true"
+    android:id="@+id/final_layout_external"
     tools:context="com.teamflightclub.flightclub.FinalTicketActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/img_qr_code_image"
-        android:layout_gravity="center_horizontal" />
 
+
+    <RelativeLayout
+        android:id="@+id/last_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/final_confirm"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:gravity="center_horizontal"
+            android:text="Ticket Confirmation"
+            android:textAllCaps="false"
+            android:textSize="40sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/final_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Ticket Information"
+            android:textSize="20sp"
+            android:layout_below="@+id/final_confirm"
+            android:layout_alignStart="@+id/final_confirm" />
+
+        <TextView
+            android:id="@+id/final_name"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_below="@+id/final_information"
+            android:layout_alignStart="@+id/final_information" />
+
+        <TextView
+            android:id="@+id/final_price"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_below="@+id/final_name"
+            android:layout_alignStart="@+id/final_name" />
+
+        <TextView
+            android:id="@+id/final_ticketnumber"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_below="@+id/final_price"
+            android:layout_alignStart="@+id/final_price" />
+
+        <TextView
+            android:id="@+id/final_address"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_below="@+id/final_ticketnumber"
+            android:layout_alignStart="@+id/final_ticketnumber" />
+
+        <TextView
+            android:id="@+id/final_creditcard"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/final_address"
+            android:layout_below="@+id/final_address"
+            android:layout_marginTop="14dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/final_divide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="---------------------------------------------------------------"
+            android:layout_below="@+id/final_creditcard"
+            android:paddingLeft="50dp"
+            android:paddingRight="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/img_qr_code_image"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/final_divide"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/final_save"
+            android:layout_width="wrap_content"
+            android:layout_height="68dp"
+            android:text="Save as PDF"
+            android:textAllCaps="false"
+            android:layout_alignBaseline="@+id/final_name"
+            android:layout_alignBottom="@+id/final_name"
+            android:layout_alignEnd="@+id/final_divide" />
+
+
+    </RelativeLayout>
 </LinearLayout>
