@@ -23,7 +23,11 @@ public class Car extends Reservation{
     public Car() {
     }
 
-    public Car(String PIID, String supplierName, int adultCount, String carMakeModel, String ratePeriodCode, double unitPrice, double totalPrice, String carClass, int largeLuggageCount, int carDoorCount, String thumbnailUrl, String dropOffCode, String pickupCode) {
+    public Car(String PIID, String supplierName, int adultCount, String carMakeModel,
+               String ratePeriodCode, double unitPrice, double totalPrice, String carClass,
+               int largeLuggageCount, int carDoorCount, String thumbnailUrl,
+               String dropOffCode, String pickupCode) {
+
         this.reservationDb = "Cars";
         this.PIID = PIID;
         this.reservationId = PIID;

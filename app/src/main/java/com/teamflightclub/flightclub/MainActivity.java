@@ -68,6 +68,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        carsCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent goToCarSearch = new Intent(MainActivity.this, CarSearchActivity.class);
+                startActivity(goToCarSearch);
+            }
+        });
+
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 

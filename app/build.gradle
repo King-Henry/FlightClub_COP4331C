@@ -36,5 +36,5 @@ dependencies {
     compile files('libs/additionnal.jar')
     compile files('libs/mail.jar')
     compile files('libs/PDFRenderer-0.9.0.jar')
-
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }
