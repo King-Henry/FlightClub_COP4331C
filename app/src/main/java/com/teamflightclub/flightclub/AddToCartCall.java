@@ -2,11 +2,13 @@ package com.teamflightclub.flightclub;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -38,29 +40,88 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
 
         final OkHttpClient okHttpClient = new OkHttpClient();
 
-
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("reservationName", flight.reservationName)
-                .addFormDataPart("reservationId", flight.reservationId)
-                .addFormDataPart("reservationPrice", Double.toString(flight.reservationPrice))
-                .addFormDataPart("reservationLocationCode", flight.reservationLocationCode)
-                .addFormDataPart("reservationDb", flight.reservationDb)
-                .build();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .method("POST", RequestBody.create(null, new byte[0]))
-                .post(requestBody)
-                .build();
         try {
+
+
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("userId", PreferenceManager.getDefaultSharedPreferences(context).getString(("userRowID"), ""))
+                    .addFormDataPart("reservationName", flight.reservationName)
+                    .addFormDataPart("reservationId", flight.reservationId)
+                    .addFormDataPart("reservationPrice", Double.toString(flight.reservationPrice))
+                    .addFormDataPart("reservationLocationCode", flight.reservationLocationCode)
+                    .addFormDataPart("reservationDb", flight.reservationDb)
+                    .build();
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .method("POST", RequestBody.create(null, new byte[0]))
+                    .post(requestBody)
+                    .build();
+
             Response response = okHttpClient.newCall(request).execute();
             Log.v("AddTOCartCall", response.body().string());
-            return response.body().string();
+
+            if (flight.secondLeg != null) {
+
+                TimeUnit.MILLISECONDS.sleep(950);
+
+                RequestBody requestBodyTwo = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("userId", PreferenceManager.getDefaultSharedPreferences(context).getString(("userRowID"), ""))
+                        .addFormDataPart("reservationName", flight.secondLeg.reservationName)
+                        .addFormDataPart("reservationId", flight.secondLeg.reservationId)
+                        .addFormDataPart("reservationPrice", Double.toString(flight.secondLeg.reservationPrice))
+                        .addFormDataPart("reservationLocationCode", flight.secondLeg.reservationLocationCode)
+                        .addFormDataPart("reservationDb", flight.secondLeg.reservationDb)
+                        .build();
+
+                Request requestTwo = new Request.Builder()
+                        .url(url)
+                        .method("POST", RequestBody.create(null, new byte[0]))
+                        .post(requestBodyTwo)
+                        .build();
+
+                Response responseTwo = okHttpClient.newCall(requestTwo).execute();
+                Log.v("AddTOCartCall", responseTwo.body().string());
+
+                if (flight.thirdLeg != null) {
+
+                    TimeUnit.MILLISECONDS.sleep(950);
+
+                    RequestBody requestBodyThree = new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("userId", PreferenceManager.getDefaultSharedPreferences(context).getString(("userRowID"), ""))
+                            .addFormDataPart("reservationName", flight.thirdLeg.reservationName)
+                            .addFormDataPart("reservationId", flight.thirdLeg.reservationId)
+                            .addFormDataPart("reservationPrice", Double.toString(flight.thirdLeg.reservationPrice))
+                            .addFormDataPart("reservationLocationCode", flight.thirdLeg.reservationLocationCode)
+                            .addFormDataPart("reservationDb", flight.thirdLeg.reservationDb)
+                            .build();
+
+                    Request requestThree = new Request.Builder()
+                            .url(url)
+                            .method("POST", RequestBody.create(null, new byte[0]))
+                            .post(requestBodyThree)
+                            .build();
+
+                    Response responseThree = okHttpClient.newCall(requestThree).execute();
+                    Log.v("AddTOCartCall", responseThree.body().string());
+
+                    return (responseThree.body().string());
+
+                }
+
+                return (responseTwo.body().string());
+            }
+
+            return (response.body().string());
 
 
         }catch (IOException e){
 
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -70,8 +131,10 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
     @Override
     protected void onPostExecute(String response) {
 
-        if(response != null && response.equals("Successfully Added to Cart")){
+        Log.v("PostExecuteResponse",response);
 
+        if(!response.equals("") && !response.equals(null) && response.equals("Successfully Added to Cart")){
+            Log.v("asyncCallback","Point Reached");
             asyncCallback.done();
         }
 

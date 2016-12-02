@@ -3,12 +3,16 @@ package com.teamflightclub.flightclub;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +30,9 @@ import static com.teamflightclub.flightclub.R.id.spinner2;
 
 public class PaymentSystemActivity extends Activity implements OnItemSelectedListener {
     private static final String TAG = "SimpleActivity";
+    EditText firstName;
+    EditText lastName;
+    EditText address;
     ArrayList<String> countries;
     ArrayList<String> statesName;
     Spinner citizenship;
@@ -33,13 +40,26 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
     TextView statesText;
     Button payment;
     boolean q=false;
+    boolean textPaymentPermission = false;
+    boolean buttonPaymentPermission = false;
+    boolean countryPaymentPermission = false;
     CardValidCallback cardValidCallback = new CardValidCallback() {
         @Override
         public void cardValid(CreditCard card) {
 
 
             Log.d(TAG, "valid card: " + card);
-            Toast.makeText(PaymentSystemActivity.this, "Card valid and complete", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PaymentSystemActivity.this, "Card valid", Toast.LENGTH_SHORT).show();
+            buttonPaymentPermission = true;
+
+            if(!firstName.getText().toString().equals("")
+                    && !lastName.getText().toString().equals("") && textPaymentPermission && countryPaymentPermission){
+
+                payment.setEnabled(true);
+            }
+            else{
+                payment.setEnabled(false);
+            }
         }
     };
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +87,36 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
         states = (Spinner)findViewById(spinner2);
         states.setOnItemSelectedListener(this);
 
+        firstName = (EditText)findViewById(R.id.editText2);
+        lastName = (EditText)findViewById(R.id.editText3);
+        address = (EditText)findViewById(R.id.editText5);
+        address.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!firstName.getText().toString().equals("") && !lastName.getText().toString().equals("")){
+                    textPaymentPermission = true;
+                    if (buttonPaymentPermission && countryPaymentPermission) {
+                        payment.setEnabled(true);
+                    }
+                }
+                else{
+                    payment.setEnabled(false);
+                }
+
+                return;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item, countries);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citizenship.setAdapter(dataAdapter);
@@ -78,11 +128,11 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
         final CreditCardForm zipForm = (CreditCardForm) findViewById(R.id.form_with_zip);
         zipForm.setOnCardValidCallback(cardValidCallback);
         payment = (Button)findViewById(R.id.pay);
+        payment.setEnabled(false);
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                goTopayment();
+                makePayment(v);
             }
         });
 
@@ -91,6 +141,7 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
         String item = parent.getItemAtPosition(position).toString();
+        countryPaymentPermission = true;
 
         // Showing selected spinner item
      //   if (q==true)
@@ -170,6 +221,12 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
     public void goTopayment(){
         Intent i = new Intent(this, FinalTicketActivity.class);
         startActivity(i);
+    }
+
+    public void makePayment(View view) {
+        PaymentAuthenticator paymentAuthenticator = new PaymentAuthenticator(this);
+        paymentAuthenticator.execute(PreferenceManager.getDefaultSharedPreferences(this).getString(("userRowID"), ""));
+        //goTopayment();
     }
 
 }

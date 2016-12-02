@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 Intent toMyCart = new Intent(MainActivity.this, MyCartActivity.class);
                 startActivity(toMyCart);
             }
         });
-
 
         flightsCategory.setOnClickListener(new View.OnClickListener() {
             @Override

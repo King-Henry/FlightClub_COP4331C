@@ -24,6 +24,11 @@
         <activity
             android:name=".CreateAccountActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ViewPurchasedTickets"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".ui.ViewPursTicketsActivity"
             android:screenOrientation="portrait" />
@@ -60,10 +65,16 @@
         <activity
             android:name=".FinalTicketActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".CarSearchActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".CarDetailScreenActivity"></activity>
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".CarDetailScreenActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
     </application>
 
 </manifest>

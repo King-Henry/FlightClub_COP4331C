@@ -109,7 +109,7 @@ public class TicketDetailActivity extends AppCompatActivity implements AsyncCall
             @Override
             public void onClick(View v) {
 
-                new AddToCartCall(flight,TicketDetailActivity.this,TicketDetailActivity.this).execute();
+                addToCart();
             }
         });
 
@@ -191,6 +191,10 @@ public class TicketDetailActivity extends AppCompatActivity implements AsyncCall
             sign_in_text.setVisibility(GONE);
 
         }
+    }
+
+    public void addToCart() {
+        new AddToCartCall(flight,TicketDetailActivity.this,TicketDetailActivity.this).execute();
     }
 
     @Override
