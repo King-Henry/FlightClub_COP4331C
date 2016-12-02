@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -63,6 +64,8 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
 
             if (flight.secondLeg != null) {
 
+                TimeUnit.MILLISECONDS.sleep(950);
+
                 RequestBody requestBodyTwo = new MultipartBody.Builder()
                         .setType(MultipartBody.FORM)
                         .addFormDataPart("userId", PreferenceManager.getDefaultSharedPreferences(context).getString(("userRowID"), ""))
@@ -83,6 +86,8 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
                 Log.v("AddTOCartCall", responseTwo.body().string());
 
                 if (flight.thirdLeg != null) {
+
+                    TimeUnit.MILLISECONDS.sleep(950);
 
                     RequestBody requestBodyThree = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
@@ -115,6 +120,8 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
 
         }catch (IOException e){
 
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
