@@ -85,6 +85,7 @@ public class MyCartActivity extends AppCompatActivity implements AdapterRecPayme
         ListItem item = (ListItem) listData.get(p);
 
         Intent intent = new Intent(this, PrePaymentSystemActivity.class);
+//        intent.putExtra(listData);
         startActivity(intent);
 
     }
@@ -192,7 +193,7 @@ public class MyCartActivity extends AppCompatActivity implements AdapterRecPayme
                     for (int i = 0; i < data.length(); i++) {
 
                         JSONObject dataObject = data.getJSONObject(i);
-
+                        Log.v("Cart Class",dataObject.getString("Type"));
                         switch (dataObject.getString("Type")) {
 
                             case "Flight":
@@ -237,7 +238,7 @@ public class MyCartActivity extends AppCompatActivity implements AdapterRecPayme
                                 String supplierName = dataObject.getString("SupplierName");
                                 int adultCount = dataObject.getInt("AdultCount");
                                 String carMakeModel = dataObject.getString("CarMakeModel");
-                                String ratePeriodCode = dataObject.getString("ratePeriodCode");
+                                String ratePeriodCode = dataObject.getString("RatePeriodCode");
                                 double unitPrice = dataObject.getDouble("UnitPrice");
                                 double totalPrice = dataObject.getDouble("TotalPrice");
                                 String carClass = dataObject.getString("CarClass");
@@ -247,7 +248,7 @@ public class MyCartActivity extends AppCompatActivity implements AdapterRecPayme
                                 String dropOffCode = dataObject.getString("DropOffCode");
                                 String pickupCode = dataObject.getString("PickupCode");
                                 Car car = new Car(PIID,supplierName,adultCount,carMakeModel,ratePeriodCode,unitPrice,totalPrice,carClass,largeLuggageCount,carDoorCount,thumbnailUrl,dropOffCode,pickupCode);
-                                car.setListInfo(icons[0]);
+                                car.setListInfo(icons[1]);
                                 listData.add(car);
                                 break;
 
