@@ -2,6 +2,7 @@ package com.teamflightclub.flightclub;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -51,6 +54,27 @@ public class FinalTicketActivity extends AppCompatActivity {
     Button savePDF;
     public final static int WIDTH = 500;
 
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.final_ticket_activity_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.return_button){
+
+            Intent goToMainActivity = new Intent(this, MainActivity.class);
+            startActivity(goToMainActivity);
+        }
+
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

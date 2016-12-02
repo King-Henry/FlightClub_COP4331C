@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         myAccount = (Button)findViewById(R.id.my_account_bar_button);
         settings = (Button)findViewById(R.id.settings_bar_button);
 
+        entertainmentCategory.setVisibility(View.GONE);
+
         myAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
