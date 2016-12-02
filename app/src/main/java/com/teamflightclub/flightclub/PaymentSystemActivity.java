@@ -220,13 +220,16 @@ public class PaymentSystemActivity extends Activity implements OnItemSelectedLis
     }
     public void goTopayment(){
         Intent i = new Intent(this, FinalTicketActivity.class);
+        i.putExtra("firstName", firstName.getText().toString());
+        i.putExtra("lastName", lastName.getText().toString());
+        i.putExtra("address", address.getText().toString());
         startActivity(i);
     }
 
     public void makePayment(View view) {
         PaymentAuthenticator paymentAuthenticator = new PaymentAuthenticator(this);
         paymentAuthenticator.execute(PreferenceManager.getDefaultSharedPreferences(this).getString(("userRowID"), ""));
-        //goTopayment();
+        goTopayment();
     }
 
 }

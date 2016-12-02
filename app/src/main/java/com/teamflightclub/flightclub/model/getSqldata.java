@@ -49,6 +49,7 @@ public class getSqldata {
         return data;
     }
 
+
     public static List<ListItem> getCartData() throws IOException {
         List<ListItem> cartData = new ArrayList<ListItem>();
 
@@ -120,18 +121,20 @@ public class getSqldata {
 
                 }
 
-            }
+
+                        }
 
 
-            return cartData;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return cartData;
+                        return cartData;
+                    } catch(JSONException e){
+                        e.printStackTrace();
+                    }
+                    return cartData;
 //        CartRetrieveAuthenticator cartRetrieveAuthenticator = new CartRetrieveAuthenticator(contxt);
 //        return cartRetrieveAuthenticator.execute();
-    }
-}
+                }
+            }
+
 /* Get data for the MyCart Activity */
 //    public static List<ListItem> getListData2() {
 //        List<ListItem > data = new ArrayList<>();

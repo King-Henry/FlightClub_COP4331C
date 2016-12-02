@@ -2,7 +2,6 @@ package com.teamflightclub.flightclub;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 
@@ -91,8 +90,8 @@ public class PaymentAuthenticator extends AsyncTask<String,Void,String> {
                 }
             },2500);
 
-            Intent i = new Intent(context, MainActivity.class);
-            context.startActivity(i);
+         //   Intent i = new Intent(context, MainActivity.class);
+           // context.startActivity(i);
         }
         else {
             alertDialog.setMessage("Order unsuccessful, try again.");

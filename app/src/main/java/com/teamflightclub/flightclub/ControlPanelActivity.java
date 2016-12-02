@@ -16,8 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.teamflightclub.flightclub.ui.ViewPursTicketsActivity;
-
 public class ControlPanelActivity extends AppCompatActivity {
 
         Button viewTicket;
@@ -205,4 +203,5 @@ public class ControlPanelActivity extends AppCompatActivity {
             }
         }
     }
+
 }
