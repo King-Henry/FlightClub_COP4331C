@@ -119,7 +119,7 @@ public class CarSearchResultsAdapter extends RecyclerView.Adapter<CarSearchResul
             numOfDoors.setText(car.carDoorCount + " Doors" );
             numOfBags.setText(car.largeLuggageCount + " bags");
             String unitPrice = "$" + String.format("%.2f", car.unitPrice);
-            carPrice.setText(unitPrice + "/day");
+            carPrice.setText(unitPrice + "/week");
             vehicleName.setText(car.carMakeModel);
             Glide.with(contxt).load(car.thumbnailUrl).into(carPicture);
 

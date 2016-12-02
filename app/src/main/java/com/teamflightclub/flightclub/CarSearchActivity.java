@@ -128,6 +128,7 @@ public class CarSearchActivity extends AppCompatActivity {
 
 
         new CarSearchResultsAdapter.FetchtheCars().execute();
+
         Log.v("Car Array List empty?", "" + cars.isEmpty());
         // searchResultsAdapter.notifyDataSetChanged();
 

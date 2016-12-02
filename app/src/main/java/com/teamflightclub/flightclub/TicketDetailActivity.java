@@ -201,5 +201,7 @@ public class TicketDetailActivity extends AppCompatActivity implements AsyncCall
     public void done() {
         
         Toast.makeText(this,"Ticket successfully added to cart", Toast.LENGTH_LONG).show();
+        Intent goToCart = new Intent(this, MyCartActivity.class);
+        startActivity(goToCart);
     }
 }
