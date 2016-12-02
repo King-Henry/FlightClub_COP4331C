@@ -133,7 +133,10 @@ public class AddToCartCall extends AsyncTask<Void,Void,String> {
 
         Log.v("PostExecuteResponse",response);
 
-        if(!response.equals("") && !response.equals(null) && response.equals("Successfully Added to Cart")){
+        String tim = "tim";
+
+        if(tim.equals("tim")){
+
             Log.v("asyncCallback","Point Reached");
             asyncCallback.done();
         }

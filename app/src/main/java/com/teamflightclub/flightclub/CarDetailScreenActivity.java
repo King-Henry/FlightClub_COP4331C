@@ -87,7 +87,7 @@ public class CarDetailScreenActivity extends AppCompatActivity implements AsyncC
         setContentView(R.layout.activity_car_detail_screen);
 
         Bundle bundle = getIntent().getExtras();
-        car = cars.get(bundle.getInt("carItemPostion"));
+        car = cars.get(bundle.getInt("carItemPosition"));
 
         carPicture = (ImageView)findViewById(R.id.detail_car_picture);
         vehicleName = (TextView)findViewById(R.id.vehicle_name_detail);
@@ -104,8 +104,16 @@ public class CarDetailScreenActivity extends AppCompatActivity implements AsyncC
         numOfPassengers.setText(car.adultCount + " Passengers");
         numOfDoors.setText(car.carDoorCount + " Doors");
         numOfBags.setText(car.largeLuggageCount + " Bags");
-        carPrice.setText("$" + String.format("%.2f", car.unitPrice) + "/day");
+        carPrice.setText("$" + String.format("%.2f", car.unitPrice) + "/week");
         carClassName.setText(car.carClass);
+
+        carAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new CarAddToCartCall(car, CarDetailScreenActivity.this, CarDetailScreenActivity.this).execute();
+            }
+        });
 
     }
 
@@ -134,6 +142,8 @@ public class CarDetailScreenActivity extends AppCompatActivity implements AsyncC
     @Override
     public void done() {
 
-        Toast.makeText(this,"Ticket successfully added to cart", Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Successfully added to cart", Toast.LENGTH_LONG).show();
+        Intent goToCart = new Intent(this, MyCartActivity.class);
+        startActivity(goToCart);
     }
 }
