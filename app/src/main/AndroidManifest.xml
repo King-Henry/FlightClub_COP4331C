@@ -29,6 +29,15 @@
             android:name=".CreateAccountActivity"
             android:theme="@style/AppTheme" />
 
+=======
+        <activity
+            android:name=".ViewPurchasedTickets"
+            android:screenOrientation="portrait"/>
+
+
+
+>>>>>>> PaymentAndSearch
+
         <activity
             android:name=".ui.ViewPursTicketsActivity"
             android:screenOrientation="portrait" />
@@ -73,6 +82,8 @@
             android:screenOrientation="portrait">
 
         </activity>
+=======
+>>>>>>> PaymentAndSearch
 
     </application>
 

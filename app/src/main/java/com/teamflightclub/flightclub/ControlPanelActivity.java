@@ -116,7 +116,7 @@ public class ControlPanelActivity extends AppCompatActivity {
 
     }
     public void openTickets(){
-        Intent intent = new Intent(this, ViewPursTicketsActivity.class);
+        Intent intent = new Intent(this, ViewPurchasedTickets.class);
         startActivity(intent);
     }
     public void openChangePassword() {
@@ -139,6 +139,11 @@ public class ControlPanelActivity extends AppCompatActivity {
         finish();
     }
 
+    public void openQRCode(){
+    //   Intent intent = new Intent(this, ReadQRCodeActivity.class);
+       // startActivity(intent);
+      //  scanQR();
+    }
     //product barcode mode
     public void scanBar(View v) {
         try {

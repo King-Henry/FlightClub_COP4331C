@@ -19,7 +19,7 @@ public class Activity extends Reservation {
         this.reservationId = ID;
         this.reservationDb = "Activities";
         this.reservationLocationCode = airportCode;
-        this.reservationPrice = Double.parseDouble(fromPrice.substring(0));
+        this.reservationPrice = Double.parseDouble(fromPrice.substring(1));
         this.ID = ID;
         this.title = title;
         this.duration = duration;
